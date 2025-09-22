@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DJ Mamute - A Batida que Domina Qualquer Festa | Orçamento Imediato</title>
-    <meta name="description" content="DJ Mamute: + de 500 eventos realizados! Garanta sua data com a batida poderosa que mantém a pista cheia. Orçamento rápido em 2min!">
+    <title>DJ Mamute - A Batida Poderosa que Domina Qualquer Festa | Orçamento Imediato</title>
+    <meta name="description" content="DJ Mamute: Especialista em mais de 500 eventos! Garanta sua data com a batida poderosa que mantém a pista cheia. Orçamento rápido e profissional.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --cor-principal: #8a2be2;
             --cor-secundaria: #ff00ff;
-            --cor-fundo: #000;
-            --cor-texto: #fff;
+            --cor-fundo: #000000;
+            --cor-texto: #ffffff;
             --cor-destaque: #ffd700;
             --cor-card: #1a1a1a;
+            --cor-borda: #333333;
             --altura-header: 80px;
+            --sombra-destaque: 0 0 30px rgba(138, 43, 226, 0.5);
+            --sombra-suave: 0 5px 25px rgba(0, 0, 0, 0.3);
         }
         
         * {
@@ -25,28 +28,34 @@
             box-sizing: border-box;
         }
         
+        html {
+            scroll-behavior: smooth;
+        }
+        
         body {
             margin: 0;
             font-family: 'Montserrat', sans-serif;
             background: var(--cor-fundo);
             color: var(--cor-texto);
-            line-height: 1.6;
-            scroll-behavior: smooth;
+            line-height: 1.7;
             overflow-x: hidden;
+            background: linear-gradient(135deg, #000000 0%, #1a0033 100%);
+            min-height: 100vh;
         }
         
-        h1, h2, h3 {
+        h1, h2, h3, h4 {
             font-weight: 800;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
+            line-height: 1.2;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 25px;
         }
         
-        /* Header Otimizado */
+        /* Header Premium */
         header {
             position: fixed;
             top: 0;
@@ -56,253 +65,381 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 20px;
-            background: rgba(0, 0, 0, 0.98);
+            padding: 0 30px;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
             z-index: 1000;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(138, 43, 226, 0.2);
-            border-bottom: 3px solid var(--cor-principal);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 2px solid var(--cor-principal);
+            box-shadow: var(--sombra-suave);
+        }
+        
+        header.scrolled {
+            height: 70px;
+            background: rgba(0, 0, 0, 0.98);
+            box-shadow: 0 5px 30px rgba(138, 43, 226, 0.2);
         }
         
         .logo-header {
-            height: 50px;
+            height: 45px;
             transition: all 0.3s ease;
+            filter: brightness(0) invert(1);
         }
         
-        /* Menu Mobile */
+        header.scrolled .logo-header {
+            height: 40px;
+        }
+        
+        /* Menu Mobile Avançado */
         .menu-toggle {
             display: none;
             flex-direction: column;
             cursor: pointer;
-            padding: 5px;
+            padding: 8px;
+            background: rgba(138, 43, 226, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(138, 43, 226, 0.3);
         }
         
         .menu-toggle span {
-            width: 25px;
+            width: 28px;
             height: 3px;
-            background: #fff;
+            background: var(--cor-texto);
             margin: 3px 0;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+        
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
         }
         
         nav {
             display: flex;
             align-items: center;
+            gap: 25px;
         }
         
         nav a {
-            color: #fff;
+            color: var(--cor-texto);
             text-decoration: none;
-            margin-left: 20px;
             font-weight: 600;
             font-size: 1rem;
             transition: all 0.3s ease;
             position: relative;
-            white-space: nowrap;
+            padding: 8px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--cor-principal), var(--cor-destaque));
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::before {
+            width: 100%;
         }
         
         nav a:hover {
             color: var(--cor-principal);
         }
         
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--cor-principal);
-            transition: width 0.3s ease;
-        }
-        
-        nav a:hover::after {
-            width: 100%;
-        }
-        
-        /* Hero Section - OTIMIZADA PARA CONVERSÃO */
+        /* Hero Section Premium */
         .hero {
             position: relative;
             height: 100vh;
-            min-height: 600px;
+            min-height: 700px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: var(--cor-texto);
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('foto-2.jpeg.jpeg') center/cover;
-            padding: 0 15px;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), 
+                        url('foto-2.jpeg.jpeg') center/cover fixed;
+            padding: 0 20px;
+            overflow: hidden;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(transparent, var(--cor-fundo));
         }
         
         .hero-content {
             position: relative;
-            z-index: 2;
-            padding: 20px;
-            max-width: 800px;
+            z-index: 3;
+            max-width: 900px;
             width: 100%;
+            padding: 40px 0;
         }
         
         .hero h1 {
-            font-size: 2.5rem;
-            margin: 0 0 20px 0;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
-            line-height: 1.2;
-            background: linear-gradient(45deg, var(--cor-principal), var(--cor-destaque));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 3.5rem;
+            margin: 0 0 25px 0;
+            text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.8);
+            line-height: 1.1;
+            color: var(--cor-texto);
+            background: none;
+            -webkit-text-fill-color: var(--cor-texto);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
+                           0 0 20px rgba(138, 43, 226, 0.5),
+                           0 0 30px rgba(138, 43, 226, 0.3);
+            }
+            to {
+                text-shadow: 0 0 15px rgba(255, 255, 255, 0.7),
+                           0 0 25px rgba(138, 43, 226, 0.7),
+                           0 0 35px rgba(138, 43, 226, 0.5);
+            }
         }
         
         .hero p {
-            font-size: 1.3rem;
-            margin: 0 0 30px 0;
+            font-size: 1.4rem;
+            margin: 0 0 35px 0;
             font-weight: 600;
             text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+            color: #e0e0e0;
         }
         
         .contador-pessoas {
-            background: rgba(138, 43, 226, 0.2);
-            padding: 15px;
-            border-radius: 10px;
-            margin: 20px 0;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(255, 215, 0, 0.1));
+            padding: 18px;
+            border-radius: 12px;
+            margin: 25px 0;
             font-size: 1.1rem;
-            animation: pulse 2s infinite;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            backdrop-filter: blur(10px);
+            animation: pulse 3s ease-in-out infinite;
         }
         
         .btn {
-            display: inline-block;
-            background: var(--cor-principal);
-            color: #fff;
-            padding: 18px 35px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--cor-principal), #6a1bb8);
+            color: var(--cor-texto);
+            padding: 20px 40px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 700;
-            margin: 10px;
-            transition: all 0.4s ease;
-            border: 2px solid transparent;
+            margin: 12px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
             font-size: 1.1rem;
-            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+            box-shadow: var(--sombra-destaque);
             text-transform: uppercase;
             letter-spacing: 1px;
+            min-width: 280px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
             width: 100%;
-            max-width: 300px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
         }
         
         .btn:hover {
-            transform: translateY(-3px);
-            background: transparent;
-            border-color: var(--cor-principal);
-            box-shadow: 0 8px 20px rgba(138, 43, 226, 0.6);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.6);
         }
         
         .btn-destaque {
-            background: var(--cor-destaque);
+            background: linear-gradient(135deg, var(--cor-destaque), #ffed4e);
             color: #000;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
         }
         
         .btn-destaque:hover {
-            background: transparent;
-            border-color: var(--cor-destaque);
-            color: var(--cor-destaque);
+            background: linear-gradient(135deg, #ffed4e, var(--cor-destaque));
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6);
         }
         
-        /* Sections */
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        /* Sections Premium */
         .section {
-            padding: 80px 0;
-            text-align: center;
+            padding: 100px 0;
             position: relative;
+        }
+        
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(138, 43, 226, 0.05) 0%, transparent 70%);
+            pointer-events: none;
         }
         
         .section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
+            font-size: 3rem;
+            margin-bottom: 25px;
             position: relative;
             display: inline-block;
-            padding: 0 20px;
+            padding: 0 25px;
+            text-align: center;
         }
         
         .section h2::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
+            width: 80px;
             height: 4px;
-            background: var(--cor-principal);
+            background: linear-gradient(90deg, var(--cor-principal), var(--cor-destaque));
             border-radius: 2px;
         }
         
         .section p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             max-width: 800px;
-            margin: 0 auto 30px;
-            color: #ccc;
-            padding: 0 15px;
+            margin: 0 auto 35px;
+            color: #cccccc;
+            padding: 0 20px;
+            text-align: center;
+            line-height: 1.8;
         }
         
-        /* Mascote */
+        /* Mascote Premium */
         .mascote-container {
             text-align: center;
-            margin: 30px 0;
-            padding: 20px;
+            margin: 40px 0;
+            padding: 30px;
         }
         
         .mascote-image {
-            max-width: 200px;
+            max-width: 280px;
             height: auto;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.3);
-            animation: float 3s ease-in-out infinite;
+            border-radius: 20px;
+            box-shadow: var(--sombra-destaque);
+            animation: float 6s ease-in-out infinite;
+            transition: all 0.3s ease;
+            border: 3px solid var(--cor-principal);
         }
         
-        /* Sobre */
+        .mascote-image:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 0 40px rgba(138, 43, 226, 0.7);
+        }
+        
+        /* Sobre Premium */
         .about-content {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 30px;
-            margin-top: 40px;
+            gap: 40px;
+            margin-top: 50px;
         }
         
         .about-text {
             width: 100%;
             text-align: center;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
         
         .about-text p {
-            margin-bottom: 20px;
-            text-align: left;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+            width: 100%;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, var(--cor-card), #222222);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid var(--cor-borda);
+            transition: all 0.3s ease;
+            box-shadow: var(--sombra-suave);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
         }
         
         .destaque-numero {
-            font-size: 3rem;
-            font-weight: 800;
+            font-size: 3.5rem;
+            font-weight: 900;
             color: var(--cor-destaque);
             display: block;
+            line-height: 1;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
         }
         
-        /* Diferenciais */
+        /* Diferenciais Premium */
         .diferenciais-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 20px;
-            margin-top: 40px;
-            padding: 0 10px;
+            gap: 25px;
+            margin-top: 50px;
+            padding: 0 15px;
         }
         
         .diferencial-card {
-            background: var(--cor-card);
-            padding: 30px 20px;
-            border-radius: 15px;
+            background: linear-gradient(135deg, var(--cor-card), #222222);
+            padding: 40px 30px;
+            border-radius: 20px;
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-            border: 1px solid #333;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--cor-borda);
             position: relative;
             overflow: hidden;
+            box-shadow: var(--sombra-suave);
         }
         
         .diferencial-card::before {
@@ -312,7 +449,22 @@
             left: 0;
             width: 100%;
             height: 5px;
-            background: var(--cor-principal);
+            background: linear-gradient(90deg, var(--cor-principal), var(--cor-destaque));
+        }
+        
+        .diferencial-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
+            transition: left 0.6s;
+        }
+        
+        .diferencial-card:hover::after {
+            left: 100%;
         }
         
         .diferencial-card.show {
@@ -321,55 +473,102 @@
         }
         
         .diferencial-card .icone {
-            font-size: 3rem;
-            color: var(--cor-principal);
-            margin-bottom: 15px;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
             display: block;
+            background: linear-gradient(135deg, var(--cor-principal), var(--cor-secundaria));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
-        /* Galeria */
+        .diferencial-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--cor-texto);
+        }
+        
+        .diferencial-card p {
+            color: #cccccc;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        /* Galeria Premium */
         .gallery-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 15px;
-            margin-top: 40px;
-            padding: 0 10px;
+            gap: 20px;
+            margin-top: 50px;
+            padding: 0 15px;
         }
         
         .gallery-item {
             position: relative;
             overflow: hidden;
-            border-radius: 10px;
-            height: 250px;
+            border-radius: 15px;
+            height: 300px;
+            box-shadow: var(--sombra-suave);
+            transition: all 0.4s ease;
+        }
+        
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item:hover::before {
+            opacity: 1;
         }
         
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s ease;
         }
         
         .gallery-item:hover img {
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
         
-        /* Depoimentos */
+        /* Depoimentos Premium */
         .depoimentos-container {
-            max-width: 800px;
-            margin: 40px auto 0;
-            padding: 0 15px;
+            max-width: 900px;
+            margin: 50px auto 0;
+            padding: 0 20px;
         }
         
         .depoimento-card {
-            background: var(--cor-card);
-            padding: 30px 20px;
-            border-radius: 15px;
+            background: linear-gradient(135deg, var(--cor-card), #222222);
+            padding: 40px 35px;
+            border-radius: 20px;
             text-align: center;
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             border-left: 5px solid var(--cor-principal);
+            box-shadow: var(--sombra-suave);
+            position: relative;
+        }
+        
+        .depoimento-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-size: 4rem;
+            color: var(--cor-principal);
+            opacity: 0.3;
+            font-family: serif;
         }
         
         .depoimento-card.show {
@@ -377,107 +576,167 @@
             transform: translateY(0);
         }
         
-        /* Simulador de Orçamento */
+        .depoimento-card p {
+            font-style: italic;
+            margin: 20px 0;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+        }
+        
+        .autor {
+            font-weight: 700;
+            color: var(--cor-destaque);
+            font-size: 1.1rem;
+        }
+        
+        /* Simulador de Orçamento Premium */
         .simulador-form {
-            background: var(--cor-card);
-            padding: 30px 20px;
-            border-radius: 15px;
-            max-width: 700px;
-            margin: 40px auto;
+            background: linear-gradient(135deg, var(--cor-card), #222222);
+            padding: 50px 40px;
+            border-radius: 25px;
+            max-width: 800px;
+            margin: 50px auto;
             text-align: left;
-            border: 1px solid #333;
+            border: 1px solid var(--cor-borda);
             position: relative;
+            box-shadow: var(--sombra-suave);
+            backdrop-filter: blur(10px);
         }
         
         .simulador-form::before {
             content: '🎵';
             position: absolute;
-            top: -20px;
+            top: -25px;
             left: 50%;
             transform: translateX(-50%);
-            background: var(--cor-principal);
-            width: 50px;
-            height: 50px;
+            background: linear-gradient(135deg, var(--cor-principal), var(--cor-secundaria));
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            box-shadow: var(--sombra-destaque);
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            font-size: 1rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--cor-texto);
         }
         
         .form-group input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #444;
-            border-radius: 8px;
-            background: #222;
+            padding: 15px 20px;
+            border: 2px solid var(--cor-borda);
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.5);
             color: var(--cor-texto);
-            font-size: 1rem;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--cor-principal);
+            box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.2);
         }
         
         .form-options {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
         
         .form-options label {
-            background: #222;
-            padding: 12px 15px;
-            border-radius: 25px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px 20px;
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
-            border: 1px solid #444;
-            font-weight: normal;
+            border: 2px solid var(--cor-borda);
+            font-weight: 600;
             text-align: center;
+            margin-bottom: 0;
+        }
+        
+        .form-options input[type="checkbox"] {
+            display: none;
         }
         
         .form-options input[type="checkbox"]:checked + label {
-            background: var(--cor-principal);
-            color: #000;
-            font-weight: bold;
+            background: linear-gradient(135deg, var(--cor-principal), #6a1bb8);
+            color: var(--cor-texto);
+            border-color: var(--cor-principal);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
         }
         
         .urgencia {
             text-align: center;
-            font-weight: bold;
+            font-weight: 700;
             color: var(--cor-destaque);
-            margin-top: 15px;
-            animation: pulse 1.5s infinite;
-            padding: 12px;
-            background: rgba(255, 215, 0, 0.1);
-            border-radius: 8px;
+            margin: 20px 0;
+            animation: pulse 2s infinite;
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(138, 43, 226, 0.1));
+            border-radius: 12px;
             display: none;
+            border: 1px solid rgba(255, 215, 0, 0.3);
         }
         
         #resultado-orcamento {
             text-align: center;
-            font-size: 1.3rem;
-            margin-top: 25px;
-            font-weight: bold;
-            padding: 15px;
-            background: rgba(138, 43, 226, 0.1);
-            border-radius: 8px;
+            margin-top: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(255, 215, 0, 0.05));
+            border-radius: 15px;
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            animation: slideUp 0.6s ease-out;
         }
         
-        /* Footer */
-        .footer {
-            padding: 50px 0 20px;
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .whatsapp-alternativo {
             text-align: center;
-            background: #111;
-            color: #aaa;
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(37, 211, 102, 0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(37, 211, 102, 0.3);
+        }
+        
+        .whatsapp-alternativo p {
+            margin-bottom: 15px;
+            color: #e0e0e0;
+            font-size: 1.1rem;
+        }
+        
+        /* Footer Premium */
+        .footer {
+            padding: 70px 0 30px;
+            text-align: center;
+            background: linear-gradient(180deg, #111111 0%, #000000 100%);
+            color: #aaaaaa;
             position: relative;
+            border-top: 3px solid var(--cor-principal);
         }
         
         .footer::before {
@@ -487,333 +746,710 @@
             left: 0;
             width: 100%;
             height: 5px;
-            background: linear-gradient(90deg, var(--cor-principal), var(--cor-secundaria));
+            background: linear-gradient(90deg, var(--cor-principal), var(--cor-secundaria), var(--cor-destaque));
         }
         
         .footer-logo {
-            max-width: 200px;
-            margin: 0 auto 20px;
+            max-width: 220px;
+            margin: 0 auto 25px;
             display: block;
+            filter: brightness(0) invert(1);
         }
         
-        /* WhatsApp */
+        .footer p {
+            margin: 10px 0;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        .social-links {
+            margin: 25px 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .social-links a {
+            color: var(--cor-principal);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 10px 20px;
+            border: 2px solid var(--cor-principal);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .social-links a:hover {
+            background: var(--cor-principal);
+            color: var(--cor-texto);
+            transform: translateY(-2px);
+        }
+        
+        /* WhatsApp Flutuante Premium */
         #whatsapp-float {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #25D366;
-            color: #fff;
-            padding: 15px 18px;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: var(--cor-texto);
+            padding: 18px 22px;
             border-radius: 50px;
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.5);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 700;
             z-index: 1000;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            font-size: 1rem;
             animation: float 3s ease-in-out infinite;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
         }
         
-        /* Animações */
+        #whatsapp-float:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+        }
+        
+        /* Animações Premium */
         @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg);
+            }
+            50% { 
+                transform: translateY(-10px) rotate(2deg);
+            }
         }
         
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 5px 25px rgba(138, 43, 226, 0.3);
+            }
+            50% { 
+                transform: scale(1.02);
+                box-shadow: 0 8px 30px rgba(138, 43, 226, 0.5);
+            }
         }
         
-        /* Media Queries */
+        /* Media Queries Avançadas */
         @media (min-width: 768px) {
-            .hero h1 { font-size: 3.5rem; }
-            .diferenciais-grid { grid-template-columns: repeat(3, 1fr); }
-            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-            .form-options { flex-direction: row; }
-            .about-content { flex-direction: row; text-align: left; }
+            .hero h1 { 
+                font-size: 4.5rem; 
+                letter-spacing: 1px;
+            }
+            
+            .hero p {
+                font-size: 1.6rem;
+            }
+            
+            .btn-container {
+                flex-direction: row;
+                justify-content: center;
+            }
+            
+            .btn {
+                min-width: 250px;
+            }
+            
+            .section h2 {
+                font-size: 3.5rem;
+            }
+            
+            .diferenciais-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
+                padding: 0;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+                padding: 0;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .form-options {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .form-options label {
+                flex: 1;
+                min-width: 200px;
+            }
+            
+            .menu-toggle {
+                display: none;
+            }
+            
+            nav {
+                display: flex !important;
+            }
         }
         
         @media (max-width: 767px) {
-            .menu-toggle { display: flex; }
-            nav { 
-                display: none; 
-                position: absolute; 
-                top: 100%; 
-                left: 0; 
-                width: 100%; 
-                background: rgba(0, 0, 0, 0.95); 
-                flex-direction: column; 
-                padding: 20px; 
+            .menu-toggle {
+                display: flex;
             }
-            nav.active { display: flex; }
-            nav a { margin: 10px 0; width: 100%; text-align: center; }
+            
+            nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 25px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                border-top: 2px solid var(--cor-principal);
+            }
+            
+            nav.active {
+                display: flex;
+            }
+            
+            nav a {
+                margin: 12px 0;
+                font-size: 1.2rem;
+                padding: 12px 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                width: 100%;
+                text-align: center;
+            }
+            
+            nav a:last-child {
+                border-bottom: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .section {
+                padding: 70px 0;
+            }
+            
+            .section h2 {
+                font-size: 2.3rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                padding: 18px 25px;
+                font-size: 1rem;
+                min-width: 220px;
+            }
+            
+            .section h2 {
+                font-size: 2rem;
+            }
+            
+            .destaque-numero {
+                font-size: 2.8rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header Premium -->
     <header id="main-nav">
-        <img src="logo-branca.png.png" alt="DJ Mamute" class="logo-header">
+        <img src="logo-branca.png.png" alt="DJ Mamute - DJ Profissional" class="logo-header">
         <div class="menu-toggle" id="mobile-menu">
             <span></span>
             <span></span>
             <span></span>
         </div>
         <nav id="main-menu">
-            <a href="#sobre">Sobre</a>
+            <a href="#sobre">Sobre o Mamute</a>
             <a href="#por-que">Vantagens</a>
-            <a href="#galeria">Fotos</a>
-            <a href="#depoimentos">Clientes</a>
+            <a href="#galeria">Galeria</a>
+            <a href="#depoimentos">Depoimentos</a>
             <a href="#orcamento">Orçamento</a>
         </nav>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section Premium -->
     <section class="hero">
         <div class="hero-content">
             <h1>SUA FESTA MERECE A BATIDA DO MAMUTE</h1>
-            <p>+ de 500 eventos transformados em experiências inesquecíveis</p>
+            <p>Mais de 1000 eventos transformados em experiências inesquecíveis</p>
             
-            <div class="contador-pessoas">
-                🎯 <strong>12 pessoas</strong> visualizaram esta página hoje
+           <div class="contador-pessoas" id="contador-pessoas">
+    🎯 <strong id="contador-numero">5 pessoas</strong> visualizando esta página • ⚡ <strong>Resposta em 2 minutos</strong>
             </div>
             
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
-                <a href="#orcamento" class="btn">💰 ORÇAMENTO IMEDIATO</a>
-                <a href="https://wa.me/5531998289081?text=Olá! Vi seu site e quero garantir minha data!" class="btn btn-destaque">📞 FALAR AGORA COM O MAMUTE</a>
+            <div class="btn-container">
+                <a href="#orcamento" class="btn">💰 SIMULAR ORÇAMENTO</a>
+                <a href="https://wa.me/5531998289081?text=Olá! Gostaria de mais informações sobre o DJ Mamute para meu evento." 
+                   class="btn btn-destaque">📞 FALAR COM ATENDENTE</a>
             </div>
             
-            <p style="margin-top: 20px; font-size: 0.9rem; color: #ccc;">
-                ⚡ <strong>Resposta em até 2 minutos</strong> • 📅 <strong>Agende com 50% de entrada</strong>
+            <p style="margin-top: 25px; font-size: 1rem; color: #cccccc;">
+                ✅ <strong>Garanta 5% de desconto</strong> para eventos nos próximos 30 dias
             </p>
         </div>
     </section>
 
-    <!-- Sobre -->
+    <!-- Sobre Premium -->
     <section id="sobre" class="section">
         <div class="container">
-            <h2>SUA FESTA, NOSSA MISSÃO</h2>
-            <p>Há mais de 5 anos transformando eventos em momentos épicos em Belo Horizonte e região</p>
+            <h2>SUA FESTA, NOSSA EXPERIÊNCIA</h2>
+            <p>Há mais de 5 anos criando momentos épicos em Minas Gerais</p>
             
             <div class="mascote-container">
-                <img src="logo-mascote.png" alt="Mascote DJ Mamute" class="mascote-image">
+                <img src="logo-mascote.png.png" alt="Mascote DJ Mamute" class="mascote-image">
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="destaque-numero">1000+</span>
+                    <h4>Eventos Realizados</h4>
+                    <p>Universitários, 15 anos, casamento, formaturas</p>
+                </div>
+                <div class="stat-card">
+                    <span class="destaque-numero">98%</span>
+                    <h4>Taxa de Satisfação</h4>
+                    <p>Clientes que recomendariam a um amigo</p>
+                </div>
+                <div class="stat-card">
+                    <span class="destaque-numero">24/7</span>
+                    <h4>Atendimento</h4>
+                    <p>Suporte completo sempre</p>
+                </div>
             </div>
             
             <div class="about-content">
                 <div class="about-text">
-                    <p><span class="destaque-numero">500+</span> eventos realizados com excelência</p>
-                    <p><span class="destaque-numero">98%</span> dos clientes indicam para amigos</p>
-                    <p><span class="destaque-numero">24/7</span> atendimento personalizado</p>
-                    
-                    <p><strong>DJ Mamute</strong> não é apenas um DJ - é a garantia de que sua festa será <strong>o evento do ano</strong>. Com equipamento de última geração e um repertório que agrada de 8 a 80 anos.</p>
+                    <p>O <strong>DJ Mamute</strong> é referência em qualidade sonora e energia contagiante.Repertório cuidadosamente selecionado, garantimos que sua festa será <strong>o evento do ano</strong>.</p>
+                    <p>Nossa missão vai além de tocar música: criamos atmosferas, conectamos pessoas e transformamos momentos comuns em <strong>memórias eternas</strong>.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Diferenciais -->
+    <!-- Diferenciais Premium -->
     <section id="por-que" class="section">
         <div class="container">
-            <h2>VANTAGENS EXCLUSIVAS MAMUTE</h2>
-            <p>Por que somos o DJ mais contratado de Belo Horizonte</p>
+            <h2>POR QUE O DJ MAMUTE?</h2>
+            <p>Diferenças que fazem toda a diferença na sua festa</p>
             
             <div class="diferenciais-grid">
                 <div class="diferencial-card">
-                    <span class="icone">🎵</span>
+                    <span class="icone">🎶</span>
                     <h3>Som Profissional</h3>
-                    <p>Equipamento de estúdio que faz a diferença na qualidade do som</p>
+                    <p>Equipamento de estúdio com qualidade superior que faz a diferença em qualquer ambiente</p>
                 </div>
                 <div class="diferencial-card">
                     <span class="icone">💡</span>
-                    <h3>Iluminação de Show</h3>
-                    <p>Show de luzes profissional incluso em todos os pacotes</p>
+                    <h3>Iluminação Completa</h3>
+                    <p>Show de luzes profissional, criando a atmosfera perfeita para cada momento</p>
                 </div>
                 <div class="diferencial-card">
                     <span class="icone">⏱️</span>
-                    <h3>Pontualidade Britânica</h3>
-                    <p>Chegamos 3 horas antes para montagem e testes</p>
+                    <h3>Pontualidade Absoluta</h3>
+                    <p>Chegamos antes para montagem e testes, garantindo tudo perfeito</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Galeria -->
+    <!-- Galeria Premium -->
     <section id="galeria" class="section">
         <div class="container">
-            <h2>FESTAS QUE VIRARAM LENDA</h2>
-            <p>Alguns dos momentos que criamos para nossos clientes</p>
+            <h2>MOMENTOS INESQUECÍVEIS</h2>
+            <p>Alguns registros dos eventos que transformamos com nossa energia</p>
             
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="foto-4.png.png" alt="Evento corporativo" loading="lazy">
+                    <img src="foto-4.png.png" alt="DJ Mamute em evento corporativo" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="foto-3.jpeg.jpeg" alt="Festa de formatura" loading="lazy">
+                    <img src="foto-3.jpeg.jpeg" alt="Público dançando em festa" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="foto-6.png.png" alt="Casamento premium" loading="lazy">
+                    <img src="foto-6.png.png" alt="Show de luzes profissional" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="foto-5.png.png" alt="Show particular" loading="lazy">
+                    <img src="foto-5.png.png" alt="DJ Mamute mixando" loading="lazy">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Depoimentos -->
+    <!-- Depoimentos Premium -->
     <section id="depoimentos" class="section">
         <div class="container">
-            <h2>CLIENTES SATISFEITOS</h2>
-            <p>A melhor propaganda é a recomendação de quem já viveu a experiência</p>
+            <h2>O QUE NOSSOS CLIENTES DIZEM</h2>
+            <p>A satisfação de quem já viveu a experiência Mamute</p>
             
             <div class="depoimentos-container">
                 <div class="depoimento-card">
                     <p>⭐⭐⭐⭐⭐</p>
-                    <p>"Contratamos o DJ Mamute para nosso casamento e foi sensacional! A pista não esvaziou um minuto, o som era perfeito e a energia contagiante. Valeu cada centavo!"</p>
-                    <p><strong>– Marina e Rodrigo, Casamento em BH</strong></p>
+                    <p>"Contratamos o DJ Mamute para nossa formatura e foi a melhor decisão! A pista ficou lotada a noite toda, o repertório foi perfeito para todos os gostos e o profissionalismo impressionante. Super indicamos!"</p>
+                    <p class="autor">- Pedro Fernandes, Formatura em BH</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Orçamento -->
-    <section id="orcamento" class="section">
-        <div class="container">
-            <h2>ORÇAMENTO TRANSPARENTE</h2>
-            <p>Simule agora mesmo e garanta <strong>5% de desconto</strong> para eventos nos próximos 30 dias</p>
+    <!-- Orçamento Premium -->
+   <section id="orcamento" class="section">
+    <div class="container">
+        <h2>FAÇA SEU ORÇAMENTO</h2>
+        <p>Preencha os dados e receba uma estimativa precisa em tempo real</p>
+        
+        <div class="simulador-form">
+            <div class="form-group">
+                <label for="data-evento">📅 Data do Evento:</label>
+                <input type="date" id="data-evento" required>
+            </div>
             
-            <div class="simulador-form">
-                <div class="form-group">
-                    <label for="data-evento">📅 Data do Seu Evento:</label>
-                    <input type="date" id="data-evento" required>
+            <div class="form-group">
+                <label for="num-pessoas">👥 Número de Convidados:</label>
+                <input type="number" id="num-pessoas" min="10" value="100" required>
+            </div>
+            
+            <!-- 💰 SERVICOS EXTRAS - CORRIGIDO -->
+            <div class="form-group">
+                <label>🎛️ Serviços Extras (opcionais):</label>
+                <div class="form-options">
+                    <input type="checkbox" id="luzes" data-nome="Show de Luzes Profissional" data-preco="300">
+                    <label for="luzes">Show de Luzes (+R$300)</label>
+
+                    <input type="checkbox" id="fogos" data-nome="Efeitos Especiais" data-preco="500">
+                    <label for="fogos">Efeitos de Fumaça (+R$500)</label>
+
+                    <input type="checkbox" id="som" data-nome="Sistema de Som Extra" data-preco="800">
+                    <label for="som">Som Potente Extra (+R$800)</label>
                 </div>
-                
-                <div class="form-group">
-                    <label for="num-pessoas">👥 Número de Convidados:</label>
-                    <input type="number" id="num-pessoas" min="10" value="100" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>🎛️ Serviços Desejados:</label>
-                    <div class="form-options">
-                        <input type="checkbox" id="luzes" data-nome="Show de Luzes" data-preco="500">
-                        <label for="luzes">Show de Luzes Profissional</label>
-                        
-                        <input type="checkbox" id="fogos" data-nome="Efeitos Especiais" data-preco="800">
-                        <label for="fogos">Efeitos de Fumaça e Laser</label>
-                        
-                        <input type="checkbox" id="som" data-nome="Som Potente" data-preco="1200">
-                        <label for="som">Sistema de Som Extra</label>
-                    </div>
-                </div>
-                
-                <div class="urgencia" id="urgencia-msg"></div>
-                
-                <button class="btn" onclick="calcularOrcamento()">💲 CALCULAR MEU ORÇAMENTO</button>
-                
-                <div id="resultado-orcamento"></div>
+            </div>
+            
+            <div class="urgencia" id="urgencia-msg"></div>
+            
+            <button class="btn" onclick="calcularOrcamento()" style="width: 100%; margin: 25px 0;">
+                💲 CALCULAR ORÇAMENTO PERSONALIZADO
+            </button>
+            
+            <div id="resultado-orcamento"></div>
+            
+            <div class="whatsapp-alternativo">
+                <p>💬 <strong>Prefere falar diretamente?</strong></p>
+                <a href="https://wa.me/5531998289081?text=Olá! Gostaria de agendar uma reunião para discutir como o DJ Mamute pode transformar meu evento." 
+                   class="btn btn-destaque" style="min-width: 200px;">
+                   📅 AGENDAR REUNIÃO
+                </a>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Footer -->
+    <!-- Footer Premium -->
     <footer class="footer">
         <div class="container">
             <img src="logo-branca.png.png" alt="DJ Mamute" class="footer-logo">
-            <p><strong>DJ MAMUTE - A batida que vira memória</strong></p>
-            <p>Belo Horizonte • Minas Gerais • Atendemos toda região</p>
+            <p><strong>DJ MAMUTE - A batida que transforma festas em lendas</strong></p>
+            <p> Ouro Preto • Minas Gerais • Atendemos todo Brasil</p>
             
             <div class="social-links">
-                <a href="https://wa.me/5531998289081">WhatsApp</a> | 
-                <a href="https://instagram.com/djmamute.op">Instagram</a> | 
-                <a href="#">TikTok</a>
+                <a href="https://wa.me/5531998289081" target="_blank">WhatsApp</a>
+                <a href="https://instagram.com/djmamute.op" target="_blank">Instagram</a>
+                <a href="#" target="_blank">TikTok</a>
             </div>
             
-            <p>⏰ <strong>Atendimento:</strong> Segunda a Sábado, 8h às 22h</p>
+            <p>⏰ <strong>Horário de Atendimento:</strong> Segunda a Sábado, 8h às 22h</p>
             <p>📞 <strong>Telefone:</strong> (31) 99828-9081</p>
+            <p>✉️ <strong>E-mail:</strong> contato@djmamute.com</p>
+            
+            <p style="margin-top: 30px; font-size: 0.9rem; color: #888;">
+                &copy; 2024 DJ Mamute. Todos os direitos reservados. | Desenvolvido com ❤️ para festas inesquecíveis
+            </p>
         </div>
     </footer>
 
-    <!-- WhatsApp -->
-    <a href="https://wa.me/5531998289081" id="whatsapp-float">
-        <span>Chamar no WhatsApp</span> 💬
+    <!-- WhatsApp Flutuante Premium -->
+    <a href="https://wa.me/5531998289081?text=Olá! Gostaria de mais informações sobre o DJ Mamute." 
+       target="_blank" 
+       id="whatsapp-float"
+       title="Falar com nossa atendente">
+        <span>Falar no WhatsApp</span> 💬
     </a>
 
     <script>
-        const phone = '5531998289081';
-        const BASE_PRICE = 2000;
-        const PRICE_PER_PERSON = 10;
+        // Configurações
+         const PHONE = '5531998289081';
+         const PRICE_PER_HOUR = 600;  // 
+         const MIN_HOURS = 1;         // 
+         const PRICE_PER_PERSON = 4;
+         const MAX_FUTURE_YEARS = 2;
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeMenu();
+            initializeCalendar();
+            initializeAnimations();
+            initializeScrollEffects();
+            inicializarContadorPessoas();
+        });
 
         // Menu Mobile
-        document.addEventListener('DOMContentLoaded', function() {
+        function initializeMenu() {
             const menuToggle = document.getElementById('mobile-menu');
             const mainMenu = document.getElementById('main-menu');
             
             menuToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
                 mainMenu.classList.toggle('active');
             });
-
-            // Calendário - Bloqueia datas passadas
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('data-evento').min = today;
-
-            // Urgência
-            document.getElementById('data-evento').addEventListener('change', function() {
-                const interessados = Math.floor(Math.random() * 8) + 3;
-                document.getElementById('urgencia-msg').innerHTML = 
-                    `🔥 <strong>${interessados} pessoas</strong> interessadas nesta data! Reserve agora.`;
-                document.getElementById('urgencia-msg').style.display = 'block';
-            });
-
-            // Animações
-            window.addEventListener('scroll', function() {
-                document.querySelectorAll('.diferencial-card, .depoimento-card').forEach(function(el) {
-                    if (el.getBoundingClientRect().top < window.innerHeight - 100) {
-                        el.classList.add('show');
-                    }
+            
+            // Fechar menu ao clicar nos links
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuToggle.classList.remove('active');
+                    mainMenu.classList.remove('active');
                 });
             });
-        });
-
-        function calcularOrcamento() {
-            const data = document.getElementById('data-evento').value;
-            const pessoas = document.getElementById('num-pessoas').value;
-            
-            if (!data) {
-                alert('📅 Selecione a data do seu evento!');
-                return;
-            }
-
-            // Bloqueia datas passadas
-            if (new Date(data) < new Date().setHours(0,0,0,0)) {
-                alert('❌ Não é possível agendar para datas passadas!');
-                document.getElementById('data-evento').value = new Date().toISOString().split('T')[0];
-                return;
-            }
-
-            let total = BASE_PRICE;
-            if (pessoas > 100) total += (pessoas - 100) * PRICE_PER_PERSON;
-
-            // Desconto para eventos próximos
-            const diasRestantes = Math.ceil((new Date(data) - new Date()) / (1000 * 60 * 60 * 24));
-            const desconto = diasRestantes <= 30 ? 0.05 : 0;
-
-            const valorFinal = total * (1 - desconto);
-            
-            document.getElementById('resultado-orcamento').innerHTML = `
-                <h3>🎉 SEU ORÇAMENTO</h3>
-                <p>Para <strong>${pessoas} convidados</strong> em <strong>${data}</strong></p>
-                ${desconto ? '<p style="color:#ffd700">💰 <strong>5% DE DESCONTO APROVADO!</strong></p>' : ''}
-                <p style="font-size:2rem; color:#ffd700; margin:15px 0"><strong>R$ ${valorFinal.toLocaleString('pt-BR')}</strong></p>
-                <a href="https://wa.me/${phone}?text=Olá! Gostaria de confirmar o orçamento de R$ ${valorFinal.toLocaleString('pt-BR')} para ${pessoas} pessoas na data ${data}" 
-                   class="btn btn-destaque" style="margin:10px 0">
-                   ✅ CONFIRMAR RESERVA
-                </a>
-                <p style="font-size:0.9rem; color:#ccc">⚡ <strong>Orçamento válido por 24 horas</strong></p>
-            `;
         }
+
+        // Calendário com limites
+        function initializeCalendar() {
+            const dataInput = document.getElementById('data-evento');
+            const today = new Date();
+            const maxDate = new Date();
+            maxDate.setFullYear(today.getFullYear() + MAX_FUTURE_YEARS);
+            
+            // Formatar datas para YYYY-MM-DD
+            const formatDate = (date) => date.toISOString().split('T')[0];
+            
+            dataInput.setAttribute('min', formatDate(today));
+            dataInput.setAttribute('max', formatDate(maxDate));
+            dataInput.value = formatDate(today);
+
+            // Mensagem de urgência
+            dataInput.addEventListener('change', function() {
+                const urgenciaMsg = document.getElementById('urgencia-msg');
+                const numInteressados = Math.floor(Math.random() * 8) + 3;
+                urgenciaMsg.innerHTML = `🔥 <strong>${numInteressados} pessoas</strong> interessadas nesta data! Garanta seu horário agora.`;
+                urgenciaMsg.style.display = 'block';
+            });
+        }
+
+        // Animações
+        function initializeAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                    }
+                });
+            }, observerOptions);
+
+            // Observar elementos animáveis
+            document.querySelectorAll('.diferencial-card, .depoimento-card').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Efeitos de scroll
+        function initializeScrollEffects() {
+            const header = document.getElementById('main-nav');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // Cálculo de orçamento
+        function calcularOrcamento() {
+            const numPessoas = parseInt(document.getElementById('num-pessoas').value);
+            const dataEvento = document.getElementById('data-evento').value;
+            
+            // Validações
+            if (!dataEvento) {
+                showAlert('📅 Por favor, selecione a data do seu evento.');
+                return;
+            }
+            
+            const selectedDate = new Date(dataEvento);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            // Validar data (passado e limite de 2 anos)
+            if (selectedDate < today) {
+                showAlert('❌ Não é possível agendar para datas passadas. Selecione uma data futura.');
+                document.getElementById('data-evento').value = today.toISOString().split('T')[0];
+                return;
+            }
+            
+            const maxFutureDate = new Date();
+            maxFutureDate.setFullYear(today.getFullYear() + MAX_FUTURE_YEARS);
+            
+            if (selectedDate > maxFutureDate) {
+                showAlert(`❌ Agendamentos limitados a ${MAX_FUTURE_YEARS} anos no futuro. Por favor, selecione uma data mais próxima.`);
+                document.getElementById('data-evento').value = maxFutureDate.toISOString().split('T')[0];
+                return;
+            }
+
+            // Cálculo do preço por hora 
+            let horasEvento = Math.max(MIN_HOURS, Math.ceil(numPessoas / 50));
+            let precoTotal = horasEvento * PRICE_PER_HOUR;
+            
+            // Adicional por pessoa (R$4 cada)
+            precoTotal += numPessoas * PRICE_PER_PERSON;
+            
+            
+            // Serviços extras
+            const servicosExtras = [];
+            const extras = document.querySelectorAll('.form-options input[type="checkbox"]:checked');
+            extras.forEach(item => {
+                servicosExtras.push(item.dataset.nome);
+                precoTotal += parseInt(item.dataset.preco);
+            });
+
+            // Descontos progressivos
+            let desconto = 0;
+            if (numPessoas > 200) desconto = 0.1;
+            if (numPessoas > 300) desconto = 0.15;
+            
+            // Desconto adicional para eventos próximos
+            const diasParaEvento = Math.ceil((selectedDate - today) / (1000 * 60 * 60 * 24));
+            if (diasParaEvento <= 30) {
+                desconto += 0.05; // 5% adicional
+            }
+            
+            const precoComDesconto = precoTotal * (1 - desconto);
+            const valorDesconto = precoTotal - precoComDesconto;
+
+            // Exibir resultado
+            exibirResultadoOrcamento(numPessoas, dataEvento, servicosExtras, precoComDesconto, valorDesconto, desconto);
+        }
+
+        function exibirResultadoOrcamento(pessoas, data, servicos, precoFinal, valorDesconto, desconto) {
+            let horasEvento = Math.max(MIN_HOURS, Math.ceil(pessoas / 50));
+            const resultadoDiv = document.getElementById('resultado-orcamento');
+            const servicosTexto = servicos.length > 0 ? 
+                `Serviços selecionados: ${servicos.join(', ')}.` : 
+                'Pacote básico incluindo DJ e iluminação padrão.';
+            
+           resultadoDiv.innerHTML = `
+    <div style="text-align: center;">
+        <h3 style="color: var(--cor-destaque); margin-bottom: 20px;">SEU ORÇAMENTO PERSONALIZADO</h3>
+
+        <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 10px; margin: 15px 0;">
+            <p style="margin: 10px 0;"><strong>Data:</strong> ${formatarData(data)}</p>
+            <p style="margin: 10px 0;"><strong>Convidados:</strong> ${pessoas} pessoas</p>
+            <p style="margin: 10px 0;"><strong>Duração:</strong> ${horasEvento} hora${horasEvento > 1 ? 's' : ''}</p>
+            <p style="margin: 10px 0;"><strong>Valor por hora:</strong> R$ ${PRICE_PER_HOUR}</p>
+            <p style="margin: 10px 0;"><strong>Taxa por pessoa:</strong> R$ ${PRICE_PER_PERSON}</p>
+            <p style="margin: 10px 0;"><strong>Serviços:</strong> ${servicosTexto}</p>
+        </div>
+    </div>
+`;
+                    
+                    ${desconto > 0 ? `
+                        <div style="background: rgba(255,215,0,0.1); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                            <p style="color: var(--cor-destaque); font-weight: bold; margin: 0;">
+                                💰 DESCONTO DE R$ ${valorDesconto.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} APLICADO!
+                            </p>
+                        </div>
+                    ` : ''}
+                    
+                    <div style="margin: 25px 0;">
+                        <p style="font-size: 0.9rem; color: #ccc; margin-bottom: 10px;">INVESTIMENTO TOTAL</p>
+                        <p style="font-size: 2.5rem; font-weight: 900; color: var(--cor-destaque); margin: 0;">
+                            R$ ${precoFinal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                        </p>
+                    </div>
+                    
+                    <a href="https://wa.me/${PHONE}?text=${encodeURIComponent(
+                        `Olá! Gostaria de confirmar o orçamento para meu evento:\n\n*Data:* ${formatarData(data)}\n*Convidados:* ${pessoas} pessoas\n*Serviços:* ${servicos.length > 0 ? servicos.join(', ') : 'Pacote básico'}\n*Valor:* R$ ${precoFinal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n\nPodemos conversar sobre os detalhes?`
+                    )}" class="btn btn-destaque" style="margin: 10px 0;">
+                        ✅ CONFIRMAR RESERVA
+                    </a>
+                    
+                    <p style="font-size: 0.9rem; color: #ccc; margin-top: 15px;">
+                        ⚡ <strong>Orçamento válido por 24 horas</strong> • 💳 <strong>Parcele em até 6x</strong>
+                    </p>
+                </div>
+            `;
+            
+            // Scroll suave para o resultado
+            resultadoDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function formatarData(dataString) {
+            const data = new Date(dataString);
+            return data.toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+        }
+
+        function showAlert(mensagem) {
+    alert(mensagem);
+}
+
+// Contador de pessoas realista
+function inicializarContadorPessoas() {
+    const contadorElemento = document.getElementById('contador-numero');
+    let basePessoas = Math.floor(Math.random() * 6) + 3; // 3-8 pessoas base
+    
+    // Aumenta gradualmente
+    const intervalo = setInterval(() => {
+        if (Math.random() > 0.7 && basePessoas < 15) {
+            basePessoas += Math.floor(Math.random() * 2) + 1;
+            contadorElemento.textContent = `${basePessoas} pessoas`;
+            
+            // Efeito visual
+            contadorElemento.parentElement.style.animation = 'none';
+            setTimeout(() => {
+                contadorElemento.parentElement.style.animation = 'pulse 1s ease-in-out';
+            }, 10);
+        }
+        
+        if (basePessoas >= 15) {
+            clearInterval(intervalo);
+        }
+    }, 15000 + Math.random() * 15000);
+
+    // Aumenta com scroll
+    let scrollAumentado = false;
+    window.addEventListener('scroll', () => {
+        if (!scrollAumentado && window.scrollY > 500 && basePessoas < 12) {
+            basePessoas += 2;
+            scrollAumentado = true;
+            contadorElemento.textContent = `${basePessoas} pessoas`;
+        }
+    });
+}
+
     </script>
 </body>
 </html>
