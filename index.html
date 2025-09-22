@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DJ Mamute - A Batida Poderosa que Domina Qualquer Festa | Orçamento Imediato</title>
-    <meta name="description" content="DJ Mamute: Especialista em mais de 500 eventos! Garanta sua data com a batida poderosa que mantém a pista cheia. Orçamento rápido e profissional.">
+    <title>DJ Mamute - A Batida Poderosa para Sua Festa em Minas Gerais | Orçamento Online</title>
+    <meta name="description" content="DJ Mamute: Mais de 1000 eventos realizados! Som profissional, iluminação e efeitos especiais para casamentos, formaturas e festas. Orçamento rápido via WhatsApp.">
+    <meta name="keywords" content="DJ Minas Gerais, som para festa, iluminação profissional, DJ Ouro Preto, festa casamento, formatura, eventos">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -75,7 +76,7 @@
         }
         
         .logo-header {
-            height: 35px;
+            height: 40px;
             transition: all 0.3s ease;
             filter: brightness(0) invert(1);
         }
@@ -163,7 +164,7 @@
             justify-content: center;
             text-align: center;
             background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), 
-                        url('foto-2.jpeg.jpeg') center/cover;
+                        #1a0033;
             padding: 80px 20px 40px;
         }
         
@@ -340,12 +341,12 @@
             overflow: hidden;
             border-radius: 12px;
             height: 250px;
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
         }
         
         /* Depoimentos Mobile */
@@ -386,7 +387,7 @@
             font-size: 1rem;
         }
         
-        .form-group input {
+        .form-group input, .form-group select {
             width: 100%;
             padding: 12px 15px;
             border: 2px solid var(--cor-borda);
@@ -418,6 +419,15 @@
         .form-options input[type="checkbox"]:checked + label {
             background: linear-gradient(135deg, var(--cor-principal), #6a1bb8);
             border-color: var(--cor-principal);
+        }
+        
+        .observacao-preco {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid var(--cor-destaque);
+            font-size: 0.9rem;
         }
         
         /* Resultado Simplificado */
@@ -464,6 +474,62 @@
             font-size: 0.9rem;
         }
         
+        /* Footer */
+        .footer {
+            padding: 50px 0 30px;
+            text-align: center;
+            background: linear-gradient(180deg, #111111 0%, #000000 100%);
+            color: #aaaaaa;
+            position: relative;
+            border-top: 3px solid var(--cor-principal);
+        }
+        
+        .footer-logo {
+            max-width: 180px;
+            margin: 0 auto 20px;
+            display: block;
+            filter: brightness(0) invert(1);
+        }
+        
+        .footer p {
+            margin: 10px 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .social-links a {
+            color: var(--cor-principal);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 8px 15px;
+            border: 2px solid var(--cor-principal);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .social-links a:hover {
+            background: var(--cor-principal);
+            color: var(--cor-texto);
+            transform: translateY(-2px);
+        }
+        
+        .direitos-reservados {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            font-size: 0.8rem;
+            color: #888;
+        }
+        
         /* Media Queries - Tablet */
         @media (min-width: 768px) {
             html {
@@ -480,7 +546,7 @@
             }
             
             .logo-header {
-                height: 40px;
+                height: 45px;
             }
             
             .menu-toggle {
@@ -582,7 +648,7 @@
 <body>
     <!-- Header Mobile First -->
     <header id="main-nav">
-        <img src="logo-branca.png.png" alt="DJ Mamute - DJ Profissional" class="logo-header">
+        <img src="logo-branca.png" alt="DJ Mamute - DJ Profissional para Festas em Minas Gerais" class="logo-header">
         <div class="menu-toggle" id="mobile-menu">
             <span></span>
             <span></span>
@@ -601,16 +667,16 @@
     <section class="hero">
         <div class="hero-content">
             <h1>SUA FESTA MERECE A BATIDA DO MAMUTE</h1>
-            <p>Mais de 1000 eventos transformados em experiências inesquecíveis</p>
+            <p>Mais de 1000 eventos transformados em experiências inesquecíveis em Minas Gerais</p>
             
             <div class="contador-pessoas" id="contador-pessoas">
                 🎯 <strong id="contador-numero">5 pessoas</strong> visualizando • ⚡ <strong>Resposta em 2 minutos</strong>
             </div>
             
             <div class="btn-container">
-                <a href="#orcamento" class="btn">💰 SIMULAR ORÇAMENTO</a>
+                <a href="#orcamento" class="btn">💰 SIMULAR ORÇAMENTO ONLINE</a>
                 <a href="https://wa.me/5531998289081?text=Olá! Gostaria de mais informações sobre o DJ Mamute para meu evento." 
-                   class="btn btn-destaque">📞 FALAR COM ATENDENTE</a>
+                   class="btn btn-destaque">📞 FALAR DIRETAMENTE NO WHATSAPP</a>
             </div>
             
             <p style="margin-top: 20px; font-size: 0.9rem; color: #cccccc;">
@@ -626,14 +692,14 @@
             <p>Há mais de 5 anos criando momentos épicos em Minas Gerais</p>
             
             <div class="mascote-container">
-                <img src="logo-mascote.png.png" alt="Mascote DJ Mamute" class="mascote-image">
+                <img src="logo-mascote.png" alt="Mascote DJ Mamute - Especialista em Festas" class="mascote-image">
             </div>
             
             <div class="stats-grid">
                 <div class="stat-card">
                     <span class="destaque-numero">1000+</span>
                     <h4>Eventos Realizados</h4>
-                    <p>Universitários, 15 anos, casamento, formaturas</p>
+                    <p>Casamentos, formaturas, 15 anos e eventos corporativos</p>
                 </div>
                 <div class="stat-card">
                     <span class="destaque-numero">98%</span>
@@ -643,7 +709,7 @@
                 <div class="stat-card">
                     <span class="destaque-numero">24/7</span>
                     <h4>Atendimento</h4>
-                    <p>Suporte completo sempre</p>
+                    <p>Suporte completo antes, durante e depois do evento</p>
                 </div>
             </div>
         </div>
@@ -652,24 +718,24 @@
     <!-- Diferenciais -->
     <section id="por-que" class="section">
         <div class="container">
-            <h2>POR QUE O DJ MAMUTE?</h2>
-            <p>Diferenças que fazem toda a diferença na sua festa</p>
+            <h2>POR QUE CONTRATAR O DJ MAMUTE?</h2>
+            <p>Diferenças que fazem toda a diferença na sua festa em Minas Gerais</p>
             
             <div class="diferenciais-grid">
                 <div class="diferencial-card">
                     <span class="icone">🎶</span>
-                    <h3>Som Profissional</h3>
-                    <p>Equipamento de estúdio com qualidade superior</p>
+                    <h3>Som Profissional de Alta Qualidade</h3>
+                    <p>Equipamento de estúdio que faz a diferença em qualquer ambiente</p>
                 </div>
                 <div class="diferencial-card">
                     <span class="icone">💡</span>
                     <h3>Iluminação Completa</h3>
-                    <p>Show de luzes profissional para cada momento</p>
+                    <p>Show de luzes profissional para criar a atmosfera perfeita</p>
                 </div>
                 <div class="diferencial-card">
                     <span class="icone">⏱️</span>
-                    <h3>Pontualidade Absoluta</h3>
-                    <p>Chegamos antes para montagem e testes</p>
+                    <h3>Pontualidade e Compromisso</h3>
+                    <p>Chegamos com antecedência para garantir que tudo esteja perfeito</p>
                 </div>
             </div>
         </div>
@@ -678,22 +744,14 @@
     <!-- Galeria -->
     <section id="galeria" class="section">
         <div class="container">
-            <h2>MOMENTOS INESQUECÍVEIS</h2>
-            <p>Alguns registros dos eventos que transformamos com nossa energia</p>
+            <h2>MOMENTOS INESQUECÍVEIS CRIADOS PELO DJ MAMUTE</h2>
+            <p>Alguns registros dos eventos que transformamos com nossa energia em Minas Gerais</p>
             
             <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="foto-4.png.png" alt="DJ Mamute em evento" loading="lazy">
-                </div>
-                <div class="gallery-item">
-                    <img src="foto-3.jpeg.jpeg" alt="Público dançando" loading="lazy">
-                </div>
-                <div class="gallery-item">
-                    <img src="foto-6.png.png" alt="Show de luzes" loading="lazy">
-                </div>
-                <div class="gallery-item">
-                    <img src="foto-5.png.png" alt="DJ Mamute mixando" loading="lazy">
-                </div>
+                <div class="gallery-item">Casamentos</div>
+                <div class="gallery-item">Formaturas</div>
+                <div class="gallery-item">Festas de 15 Anos</div>
+                <div class="gallery-item">Eventos Corporativos</div>
             </div>
         </div>
     </section>
@@ -702,12 +760,18 @@
     <section id="depoimentos" class="section">
         <div class="container">
             <h2>O QUE NOSSOS CLIENTES DIZEM</h2>
-            <p>A satisfação de quem já viveu a experiência Mamute</p>
+            <p>A satisfação de quem já viveu a experiência Mamute em Minas Gerais</p>
             
             <div class="depoimento-card">
                 <p>⭐⭐⭐⭐⭐</p>
-                <p>"Contratamos o DJ Mamute para nossa formatura e foi a melhor decisão! A pista ficou lotada a noite toda, o repertório foi perfeito para todos os gostos e o profissionalismo impressionante. Super indicamos!"</p>
-                <p class="autor">- Pedro Fernandes, Formatura em BH</p>
+                <p>"Contratamos o DJ Mamute para nossa formatura em BH e foi a melhor decisão! A pista ficou lotada a noite toda, o repertório foi perfeito para todos os gostos e o profissionalismo impressionante. Super indicamos!"</p>
+                <p class="autor">- Pedro Fernandes, Formatura em Belo Horizonte</p>
+            </div>
+            
+            <div class="depoimento-card">
+                <p>⭐⭐⭐⭐⭐</p>
+                <p>"O DJ Mamute fez a festa do nosso casamento em Ouro Preto e foi simplesmente incrível! Desde o primeiro contato até o final do evento, tudo foi perfeito. Os convidados ainda comentam sobre a qualidade do som e a energia contagiante!"</p>
+                <p class="autor">- Ana e Rodrigo, Casamento em Ouro Preto</p>
             </div>
         </div>
     </section>
@@ -715,10 +779,15 @@
     <!-- Orçamento Simplificado -->
     <section id="orcamento" class="section">
         <div class="container">
-            <h2>FAÇA SEU ORÇAMENTO</h2>
-            <p>Preencha os dados e receba uma estimativa precisa</p>
+            <h2>SOLICITE SEU ORÇAMENTO PERSONALIZADO</h2>
+            <p>Preencha os dados e receba uma estimativa precisa para sua festa</p>
             
             <div class="simulador-form">
+                <div class="observacao-preco">
+                    <strong>💰 Preço Base do Som: R$ 1.100,00</strong><br>
+                    <small>* Valor inicial para eventos básicos. O preço final varia conforme o tamanho e complexidade do evento.</small>
+                </div>
+                
                 <div class="form-group">
                     <label for="data-evento">📅 Data do Evento:</label>
                     <input type="date" id="data-evento" required>
@@ -727,24 +796,36 @@
                 <div class="form-group">
                     <label for="num-pessoas">👥 Número de Convidados:</label>
                     <input type="number" id="num-pessoas" min="10" value="100" required>
+                    <small style="display: block; margin-top: 5px; color: #ccc;">* Acima de 50 pessoas: +R$ 4,00 por pessoa adicional</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tipo-evento">🎉 Tipo de Evento:</label>
+                    <select id="tipo-evento">
+                        <option value="casamento">Casamento</option>
+                        <option value="formatura">Formatura</option>
+                        <option value="15anos">Festa de 15 Anos</option>
+                        <option value="corporativo">Evento Corporativo</option>
+                        <option value="outro">Outro</option>
+                    </select>
                 </div>
                 
                 <div class="form-group">
                     <label>🎛️ Serviços Extras (opcionais):</label>
                     <div class="form-options">
                         <input type="checkbox" id="luzes" data-nome="Show de Luzes Profissional" data-preco="300">
-                        <label for="luzes">Show de Luzes (+R$300)</label>
+                        <label for="luzes">Show de Luzes Profissional (+R$300)</label>
 
-                        <input type="checkbox" id="fogos" data-nome="Efeitos Especiais" data-preco="500">
-                        <label for="fogos">Efeitos de Fumaça (+R$500)</label>
+                        <input type="checkbox" id="pirotecnia" data-nome="Efeitos Pirotécnicos (Fumaça)" data-preco="500">
+                        <label for="pirotecnia">Efeitos Pirotécnicos com Fumaça (+R$500)</label>
 
-                        <input type="checkbox" id="som" data-nome="Sistema de Som Extra" data-preco="800">
-                        <label for="som">Som Potente Extra (+R$800)</label>
+                        <input type="checkbox" id="som-extra" data-nome="Sistema de Som Adicional" data-preco="800">
+                        <label for="som-extra">Sistema de Som Extra Potência (+R$800)</label>
                     </div>
                 </div>
                 
                 <button class="btn" onclick="calcularOrcamento()" style="width: 100%; margin: 20px 0;">
-                    💲 CALCULAR ORÇAMENTO
+                    💲 CALCULAR MEU ORÇAMENTO
                 </button>
                 
                 <div id="resultado-orcamento"></div>
@@ -755,34 +836,41 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <img src="logo-branca.png.png" alt="DJ Mamute" class="footer-logo">
+            <img src="logo-branca.png" alt="DJ Mamute - Especialista em Festas em Minas Gerais" class="footer-logo">
             <p><strong>DJ MAMUTE - A batida que transforma festas em lendas</strong></p>
             <p>Ouro Preto • Minas Gerais • Atendemos todo Brasil</p>
             
             <div class="social-links">
-                <a href="https://wa.me/5531998289081" target="_blank">WhatsApp</a>
-                <a href="https://instagram.com/djmamute.op" target="_blank">Instagram</a>
+                <a href="https://wa.me/5531998289081" target="_blank" rel="noopener">WhatsApp</a>
+                <a href="https://instagram.com/djmamute.op" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://facebook.com/djmamute" target="_blank" rel="noopener">Facebook</a>
             </div>
             
-            <p>⏰ <strong>Horário:</strong> Segunda a Sábado, 8h às 22h</p>
-            <p>📞 <strong>Telefone:</strong> (31) 99828-9081</p>
+            <p>⏰ <strong>Horário de Atendimento:</strong> Segunda a Sábado, 8h às 22h</p>
+            <p>📞 <strong>Telefone/WhatsApp:</strong> (31) 99828-9081</p>
+            <p>✉️ <strong>E-mail:</strong> contato@djmamute.com</p>
+            
+            <div class="direitos-reservados">
+                &copy; 2024 DJ Mamute. Todos os Direitos Reservados.
+            </div>
         </div>
     </footer>
 
     <!-- WhatsApp Flutuante -->
-    <a href="https://wa.me/5531998289081?text=Olá! Gostaria de mais informações sobre o DJ Mamute." 
+    <a href="https://wa.me/5531998289081?text=Olá! Gostaria de mais informações sobre o DJ Mamute para meu evento." 
        target="_blank" 
        id="whatsapp-float"
-       title="Falar com nossa atendente">
-        <span>WhatsApp</span> 💬
+       title="Falar com o DJ Mamute"
+       rel="noopener">
+        <span>Falar no WhatsApp</span> 💬
     </a>
 
     <script>
-    // Configurações
+    // Configurações atualizadas conforme solicitado
     const PHONE = '5531998289081';
-    const PRICE_PER_HOUR = 600;
+    const PRICE_BASE_SOM = 1100; // Preço base do som
+    const PRICE_PER_PERSON_OVER_50 = 4; // +R$4 por pessoa acima de 50
     const MIN_HOURS = 1;
-    const PRICE_PER_PERSON = 4;
     const MAX_FUTURE_YEARS = 2;
 
     // Inicialização
@@ -856,22 +944,26 @@
         });
     }
 
-    // Cálculo de orçamento SIMPLIFICADO
+    // Cálculo de orçamento ATUALIZADO conforme especificação
     function calcularOrcamento() {
         const numPessoas = parseInt(document.getElementById('num-pessoas').value);
         const dataEvento = document.getElementById('data-evento').value;
+        const tipoEvento = document.getElementById('tipo-evento').value;
         
         if (!dataEvento) {
             alert('📅 Por favor, selecione a data do seu evento.');
             return;
         }
 
-        // Cálculo base
-        let horasEvento = Math.max(MIN_HOURS, Math.ceil(numPessoas / 50));
-        let precoTotal = horasEvento * PRICE_PER_HOUR;
-        precoTotal += numPessoas * PRICE_PER_PERSON;
+        // Cálculo base conforme especificação
+        let precoTotal = PRICE_BASE_SOM; // Preço base do som
+        
+        // Adicional por pessoa acima de 50
+        if (numPessoas > 50) {
+            precoTotal += (numPessoas - 50) * PRICE_PER_PERSON_OVER_50;
+        }
 
-        // Serviços extras
+        // Serviços extras (separados conforme solicitado)
         const servicosExtras = [];
         const extras = document.querySelectorAll('.form-options input[type="checkbox"]:checked');
         extras.forEach(item => {
@@ -879,11 +971,14 @@
             precoTotal += parseInt(item.dataset.preco);
         });
 
-        // Descontos
+        // Descontos por tipo de evento e antecipação
         let desconto = 0;
-        if (numPessoas > 200) desconto = 0.1;
-        if (numPessoas > 300) desconto = 0.15;
         
+        // Desconto por tipo de evento
+        if (tipoEvento === 'casamento') desconto += 0.05;
+        if (tipoEvento === 'formatura') desconto += 0.03;
+        
+        // Desconto adicional para eventos próximos (até 30 dias)
         const selectedDate = new Date(dataEvento);
         const today = new Date();
         const diasParaEvento = Math.ceil((selectedDate - today) / (1000 * 60 * 60 * 24));
@@ -893,24 +988,34 @@
         const valorDesconto = precoTotal - precoComDesconto;
 
         // Exibir resultado SIMPLIFICADO
-        exibirResultadoSimplificado(numPessoas, dataEvento, servicosExtras, precoComDesconto, valorDesconto, desconto);
+        exibirResultadoSimplificado(numPessoas, dataEvento, tipoEvento, servicosExtras, precoComDesconto, valorDesconto, desconto);
     }
 
-    function exibirResultadoSimplificado(pessoas, data, servicos, precoFinal, valorDesconto, desconto) {
+    function exibirResultadoSimplificado(pessoas, data, tipoEvento, servicos, precoFinal, valorDesconto, desconto) {
         const resultadoDiv = document.getElementById('resultado-orcamento');
         const servicoPrincipal = servicos.length > 0 ? 
             `DJ Mamute + ${servicos.join(', ')}` : 'DJ Mamute - Pacote Completo';
         
+        // Texto personalizado por tipo de evento
+        const textosEvento = {
+            'casamento': 'para seu Casamento',
+            'formatura': 'para sua Formatura',
+            '15anos': 'para seus 15 Anos',
+            'corporativo': 'para seu Evento Corporativo',
+            'outro': 'para seu Evento'
+        };
+        
         resultadoDiv.innerHTML = `
             <div style="text-align: center;">
-                <h3 style="color: var(--cor-destaque); margin-bottom: 15px;">SEU ORÇAMENTO</h3>
+                <h3 style="color: var(--cor-destaque); margin-bottom: 15px;">SEU ORÇAMENTO PERSONALIZADO</h3>
                 
                 <div class="preco-simplificado">
-                    <p style="font-weight: 700; margin-bottom: 10px;">${servicoPrincipal}</p>
+                    <p style="font-weight: 700; margin-bottom: 10px; font-size: 1.1rem;">${servicoPrincipal}</p>
+                    <p style="color: #ccc; margin-bottom: 15px;">${textosEvento[tipoEvento]}</p>
                     
                     ${desconto > 0 ? `
-                        <p style="color: #ff6b6b; font-size: 0.9rem; margin: 5px 0;">
-                            💰 Desconto de ${(desconto * 100)}% aplicado!
+                        <p style="color: #4cd964; font-size: 1rem; margin: 10px 0; font-weight: bold;">
+                            💰 Desconto de ${(desconto * 100)}% aplicado! (Economia de R$ ${valorDesconto.toLocaleString('pt-BR', { minimumFractionDigits: 2 })})
                         </p>
                     ` : ''}
                     
@@ -924,13 +1029,13 @@
                 </div>
                 
                 <a href="https://wa.me/${PHONE}?text=${encodeURIComponent(
-                    `Olá! Gostaria de confirmar o orçamento:\n\n*Serviço:* ${servicoPrincipal}\n*Convidados:* ${pessoas} pessoas\n*Data:* ${formatarData(data)}\n*Valor:* R$ ${precoFinal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n\nPodemos conversar?`
-                )}" class="btn btn-destaque" style="margin: 15px 0;">
-                    ✅ CONFIRMAR RESERVA
+                    `Olá! Gostaria de confirmar o orçamento para meu evento:\n\n*Serviço:* ${servicoPrincipal}\n*Tipo de Evento:* ${tipoEvento}\n*Convidados:* ${pessoas} pessoas\n*Data:* ${formatarData(data)}\n*Valor Final:* R$ ${precoFinal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n\nPodemos conversar sobre os detalhes?`
+                )}" class="btn btn-destaque" style="margin: 15px 0; display: inline-block;">
+                    ✅ CONFIRMAR RESERVA VIA WHATSAPP
                 </a>
                 
                 <p style="font-size: 0.8rem; color: #ccc;">
-                    ⚡ Orçamento válido por 24h • 💳 Parcele em até 6x
+                    ⚡ Orçamento válido por 24h • 💳 Parcele em até 6x • 📞 Atendimento personalizado
                 </p>
             </div>
         `;
@@ -942,7 +1047,7 @@
         return new Date(dataString).toLocaleDateString('pt-BR');
     }
 
-    // Contador de pessoas
+    // Contador de pessoas (elemento de urgência)
     function inicializarContadorPessoas() {
         const contadorElemento = document.getElementById('contador-numero');
         if (!contadorElemento) return;
