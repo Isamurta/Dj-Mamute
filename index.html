@@ -740,7 +740,7 @@
             <p>Mais de 1000 eventos transformados em experiências inesquecíveis em Minas Gerais</p>
             
             <div class="contador-pessoas" id="contador-pessoas">
-                🎯 <strong id="contador-numero">5 pessoas visitando o site agora</strong> • ⚡ <strong>Resposta em 2 minutos</strong>
+                🎯 <strong id="contador-numero">5 pessoas online agora</strong> • ⚡ <strong>Resposta em 2 minutos</strong>
             </div>
             
             <div class="btn-container">
@@ -1051,12 +1051,12 @@
         if (!contadorElemento) return;
         
         let pessoasVisitadas = Math.floor(Math.random() * 50) + 20;
-        contadorElemento.textContent = `${pessoasVisitadas} pessoas visitaram hoje`;
+        contadorElemento.textContent = `${pessoasVisitadas} pessoas online agora`;
         
         const intervalo = setInterval(() => {
             if (Math.random() > 0.7 && pessoasVisitadas < MAX_PESSOAS) {
                 pessoasVisitadas += Math.floor(Math.random() * 3) + 1;
-                contadorElemento.textContent = `${pessoasVisitadas} pessoas visitaram hoje`;
+                contadorElemento.textContent = `${pessoasVisitadas} pessoas online agora`;
                 
                 contadorElemento.parentElement.style.animation = 'none';
                 setTimeout(() => {
@@ -1074,7 +1074,7 @@
             if (!scrollAumentado && window.scrollY > 500 && pessoasVisitadas < (MAX_PESSOAS - 10)) {
                 pessoasVisitadas += 3;
                 scrollAumentado = true;
-                contadorElemento.textContent = `${pessoasVisitadas} pessoas visitaram hoje`;
+                contadorElemento.textContent = `${pessoasVisitadas} pessoas online agora`;
             }
         });
     }
