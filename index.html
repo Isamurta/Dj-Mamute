@@ -229,12 +229,23 @@
             color: #000;
         }
         
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            animation: pulse-whatsapp 2s infinite;
+        }
+        
         .btn-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 12px;
             margin: 25px 0;
+        }
+        
+        @keyframes pulse-whatsapp {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
         
         /* Sections Mobile First */
@@ -388,7 +399,7 @@
             font-size: 1rem;
         }
         
-        /* Simulador Mobile */
+        /* Simulador Mobile - NOVO DESIGN */
         .simulador-form {
             background: linear-gradient(135deg, var(--cor-card), #222222);
             padding: 30px 20px;
@@ -399,7 +410,7 @@
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         .form-group label {
@@ -420,36 +431,58 @@
             font-family: 'Montserrat', sans-serif;
         }
         
-        .form-options {
+        .horas-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .hora-btn {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border: 2px solid var(--cor-borda);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .hora-btn.selected {
+            background: linear-gradient(135deg, var(--cor-principal), #6a1bb8);
+            border-color: var(--cor-principal);
+            transform: scale(1.05);
+        }
+        
+        .servicos-extras {
             display: grid;
             grid-template-columns: 1fr;
             gap: 10px;
         }
         
-        .form-options label {
+        .servico-btn {
             background: rgba(0, 0, 0, 0.3);
-            padding: 12px 15px;
-            border-radius: 10px;
-            cursor: pointer;
+            padding: 15px;
             border: 2px solid var(--cor-borda);
-            font-weight: 600;
+            border-radius: 10px;
             text-align: center;
-            margin: 0;
+            cursor: pointer;
             transition: all 0.3s ease;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
         
-        .form-options input[type="checkbox"]:checked + label {
+        .servico-btn.selected {
             background: linear-gradient(135deg, var(--cor-principal), #6a1bb8);
             border-color: var(--cor-principal);
         }
         
-        .observacao-preco {
-            background: rgba(255, 215, 0, 0.1);
-            padding: 15px;
-            border-radius: 10px;
-            margin: 15px 0;
-            border-left: 4px solid var(--cor-destaque);
-            font-size: 0.9rem;
+        .servico-btn i {
+            font-size: 1.2rem;
         }
         
         /* Resultado Simplificado */
@@ -477,7 +510,7 @@
             margin: 10px 0;
         }
         
-        /* WhatsApp Flutuante Mobile */
+        /* WhatsApp Flutuante Mobile - MELHORADO */
         #whatsapp-float {
             position: fixed;
             bottom: 20px;
@@ -494,6 +527,13 @@
             align-items: center;
             gap: 8px;
             font-size: 0.9rem;
+            animation: pulse-whatsapp 2s infinite;
+            transition: all 0.3s ease;
+        }
+        
+        #whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
         }
         
         /* Footer */
@@ -641,7 +681,11 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .form-options {
+            .horas-buttons {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .servicos-extras {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
@@ -665,7 +709,7 @@
                 max-width: 800px;
             }
             
-            .form-options {
+            .servicos-extras {
                 grid-template-columns: repeat(3, 1fr);
             }
         }
@@ -702,7 +746,7 @@
             <div class="btn-container">
                 <a href="#orcamento" class="btn">💰 SIMULAR ORÇAMENTO ONLINE</a>
                 <a href="https://wa.me/5531998289081?text=Olá! Gostaria de mais informações sobre o DJ Mamute para meu evento." 
-                   class="btn btn-destaque">📞 FALAR DIRETAMENTE NO WHATSAPP</a>
+                   class="btn btn-destaque btn-whatsapp">💬 FALAR NO WHATSAPP</a>
             </div>
             
             <p style="margin-top: 20px; font-size: 0.9rem; color: #cccccc;">
@@ -822,12 +866,6 @@
             <p>Preencha os dados e receba uma estimativa precisa para sua festa</p>
             
             <div class="simulador-form">
-                <div class="observacao-preco">
-                    <strong>💰 Preços Base (DJ + Som):</strong><br>
-                    • Funk 1h30: R$ 460 | 2h: R$ 500 | 3h: R$ 550<br>
-                    • Cerimonial (até 4h): R$ 900 | Completo: R$ 1.100
-                </div>
-                
                 <div class="form-group">
                     <label for="data-evento">📅 Data do Evento:</label>
                     <input type="date" id="data-evento" required>
@@ -835,33 +873,35 @@
                 
                 <div class="form-group">
                     <label for="num-pessoas">👥 Número de Convidados:</label>
-                    <input type="number" id="num-pessoas" min="10" max="114" value="100" required>
-                    <small style="display: block; margin-top: 5px; color: #ccc;">* Acima de 80 pessoas: +R$ 4,00 por pessoa adicional</small>
+                    <input type="number" id="num-pessoas" min="10" max="114" value="80" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="modalidade-servico">🎵 Modalidade e Duração:</label>
-                    <select id="modalidade-servico">
-                        <option value="460">Funk - 1h30 (R$ 460)</option>
-                        <option value="500">Funk - 2h (R$ 500)</option>
-                        <option value="550">Funk - 3h (R$ 550)</option>
-                        <option value="900">Cerimonial - Show até 4h (R$ 900)</option>
-                        <option value="1100">Cerimonial - Completo (R$ 1.100)</option>
-                    </select>
+                    <label>⏰ Duração do Serviço:</label>
+                    <div class="horas-buttons">
+                        <div class="hora-btn" data-horas="1.5" data-preco="460">1h30</div>
+                        <div class="hora-btn" data-horas="2" data-preco="500">2 horas</div>
+                        <div class="hora-btn" data-horas="3" data-preco="550">3 horas</div>
+                        <div class="hora-btn" data-horas="4" data-preco="900">4 horas</div>
+                    </div>
                 </div>
                 
                 <div class="form-group">
                     <label>🎛️ Serviços Extras (opcionais):</label>
-                    <div class="form-options">
-                        <input type="checkbox" id="luzes" data-nome="Show de Luzes Profissional" data-preco="300">
-                        <label for="luzes">Show de Luzes Profissional (+R$300)</label>
-
-                        <input type="checkbox" id="pirotecnia" data-nome="Efeitos Pirotécnicos (Fumaça)" data-preco="500">
-                        <label for="pirotecnia">Efeitos Pirotécnicos com Fumaça (+R$500)</label>
+                    <div class="servicos-extras">
+                        <div class="servico-btn" data-servico="som" data-preco="1100">
+                            <i>🔊</i> Sonorização Completa
+                        </div>
+                        <div class="servico-btn" data-servico="luzes" data-preco="300">
+                            <i>💡</i> Show de Luzes
+                        </div>
+                        <div class="servico-btn" data-servico="pirotecnia" data-preco="500">
+                            <i>🎇</i> Efeitos Especiais
+                        </div>
                     </div>
                 </div>
                 
-                <button class="btn" onclick="calcularOrcamento()" style="width: 100%; margin: 20px 0;">
+                <button class="btn btn-destaque" onclick="calcularOrcamento()" style="width: 100%; margin: 20px 0;">
                     💲 CALCULAR MEU ORÇAMENTO
                 </button>
                 
@@ -899,14 +939,14 @@
        id="whatsapp-float"
        title="Falar com o DJ Mamute"
        rel="noopener">
-        <span>Falar no WhatsApp</span> 💬
+        <span>💬 WhatsApp</span>
     </a>
 
     <script>
-    // Configurações atualizadas conforme solicitado
+    // Configurações atualizadas
     const PHONE = '5531998289081';
-    const MAX_PESSOAS = 114; // Alterado de 50 para 114
-    const PRICE_PER_PERSON_OVER_80 = 4; // +R$4 por pessoa acima de 80 (alterado de 50 para 80)
+    const MAX_PESSOAS = 114;
+    const PRICE_PER_PERSON_OVER_80 = 4;
     const MAX_FUTURE_YEARS = 2;
 
     // Inicialização
@@ -916,6 +956,8 @@
         initializeAnimations();
         initializeScrollEffects();
         inicializarContadorPessoas();
+        inicializarBotoesHoras();
+        inicializarServicosExtras();
     });
 
     // Menu Mobile
@@ -928,7 +970,6 @@
             mainMenu.classList.toggle('active');
         });
         
-        // Fechar menu ao clicar nos links (mobile)
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', () => {
                 if (window.innerWidth < 768) {
@@ -949,6 +990,30 @@
         dataInput.setAttribute('min', today.toISOString().split('T')[0]);
         dataInput.setAttribute('max', maxDate.toISOString().split('T')[0]);
         dataInput.value = today.toISOString().split('T')[0];
+    }
+
+    // Botões de horas
+    function inicializarBotoesHoras() {
+        const botoesHoras = document.querySelectorAll('.hora-btn');
+        botoesHoras[0].classList.add('selected'); // Seleciona 1h30 por padrão
+        
+        botoesHoras.forEach(botao => {
+            botao.addEventListener('click', function() {
+                botoesHoras.forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+    }
+
+    // Serviços extras
+    function inicializarServicosExtras() {
+        const servicos = document.querySelectorAll('.servico-btn');
+        
+        servicos.forEach(servico => {
+            servico.addEventListener('click', function() {
+                this.classList.toggle('selected');
+            });
+        });
     }
 
     // Animações
@@ -980,35 +1045,30 @@
         });
     }
 
-    // Contador de pessoas (ATUALIZADO - limite de 114 pessoas)
+    // Contador de pessoas (limite de 114)
     function inicializarContadorPessoas() {
         const contadorElemento = document.getElementById('contador-numero');
         if (!contadorElemento) return;
         
-        // Número inicial aleatório entre 3 e 114
-        let pessoasVisitadas = Math.floor(Math.random() * 111) + 3;
+        let pessoasVisitadas = Math.floor(Math.random() * 50) + 20;
         contadorElemento.textContent = `${pessoasVisitadas} pessoas visitaram hoje`;
         
-        // Aumenta gradualmente ao longo do tempo
         const intervalo = setInterval(() => {
             if (Math.random() > 0.7 && pessoasVisitadas < MAX_PESSOAS) {
                 pessoasVisitadas += Math.floor(Math.random() * 3) + 1;
                 contadorElemento.textContent = `${pessoasVisitadas} pessoas visitaram hoje`;
                 
-                // Efeito visual de destaque
                 contadorElemento.parentElement.style.animation = 'none';
                 setTimeout(() => {
                     contadorElemento.parentElement.style.animation = 'pulse 1s ease-in-out';
                 }, 10);
             }
             
-            // Para após atingir o limite de 114
             if (pessoasVisitadas >= MAX_PESSOAS) {
                 clearInterval(intervalo);
             }
         }, 15000 + Math.random() * 15000);
 
-        // Aumenta quando o usuário rola a página
         let scrollAumentado = false;
         window.addEventListener('scroll', () => {
             if (!scrollAumentado && window.scrollY > 500 && pessoasVisitadas < (MAX_PESSOAS - 10)) {
@@ -1019,39 +1079,39 @@
         });
     }
 
-    // Cálculo de orçamento ATUALIZADO conforme especificação
+    // Cálculo de orçamento
     function calcularOrcamento() {
         const numPessoas = parseInt(document.getElementById('num-pessoas').value);
         const dataEvento = document.getElementById('data-evento').value;
-        const modalidadeServico = document.getElementById('modalidade-servico');
-        const precoBase = parseInt(modalidadeServico.value);
-        const modalidadeTexto = modalidadeServico.options[modalidadeServico.selectedIndex].text;
         
         if (!dataEvento) {
             alert('📅 Por favor, selecione a data do seu evento.');
             return;
         }
 
-        // Cálculo base conforme especificação
-        let precoTotal = precoBase; // Preço base da modalidade escolhida
+        // Preço base pela duração selecionada
+        const horaSelecionada = document.querySelector('.hora-btn.selected');
+        let precoTotal = parseInt(horaSelecionada.dataset.preco);
+        const duracao = horaSelecionada.dataset.horas;
         
-        // Adicional por pessoa acima de 80 (alterado de 50 para 80)
+        // Adicional por pessoa acima de 80
         if (numPessoas > 80) {
             precoTotal += (numPessoas - 80) * PRICE_PER_PERSON_OVER_80;
         }
 
         // Serviços extras
         const servicosExtras = [];
-        const extras = document.querySelectorAll('.form-options input[type="checkbox"]:checked');
-        extras.forEach(item => {
-            servicosExtras.push(item.dataset.nome);
-            precoTotal += parseInt(item.dataset.preco);
+        const servicosSelecionados = document.querySelectorAll('.servico-btn.selected');
+        servicosSelecionados.forEach(servico => {
+            servicosExtras.push({
+                nome: servico.textContent.trim(),
+                preco: parseInt(servico.dataset.preco)
+            });
+            precoTotal += parseInt(servico.dataset.preco);
         });
 
-        // Descontos por tipo de evento e antecipação
+        // Desconto para eventos próximos (até 30 dias)
         let desconto = 0;
-        
-        // Desconto adicional para eventos próximos (até 30 dias)
         const selectedDate = new Date(dataEvento);
         const today = new Date();
         const diasParaEvento = Math.ceil((selectedDate - today) / (1000 * 60 * 60 * 24));
@@ -1060,32 +1120,28 @@
         const precoComDesconto = precoTotal * (1 - desconto);
         const valorDesconto = precoTotal - precoComDesconto;
 
-        // Exibir resultado
-        exibirResultadoSimplificado(numPessoas, dataEvento, modalidadeTexto, servicosExtras, precoComDesconto, valorDesconto, desconto);
+        exibirResultadoSimplificado(numPessoas, dataEvento, duracao, servicosExtras, precoComDesconto, valorDesconto, desconto);
     }
 
-    function exibirResultadoSimplificado(pessoas, data, modalidade, servicos, precoFinal, valorDesconto, desconto) {
+    function exibirResultadoSimplificado(pessoas, data, duracao, servicos, precoFinal, valorDesconto, desconto) {
         const resultadoDiv = document.getElementById('resultado-orcamento');
-        const servicoPrincipal = servicos.length > 0 ? 
-            `${modalidade} + ${servicos.join(', ')}` : modalidade;
         
         resultadoDiv.innerHTML = `
             <div style="text-align: center;">
-                <h3 style="color: var(--cor-destaque); margin-bottom: 15px;">SEU ORÇAMENTO PERSONALIZADO</h3>
+                <h3 style="color: var(--cor-destaque); margin-bottom: 15px;">🎉 SEU ORÇAMENTO ESTÁ PRONTO!</h3>
                 
                 <div class="preco-simplificado">
-                    <p style="font-weight: 700; margin-bottom: 10px; font-size: 1.1rem;">${servicoPrincipal}</p>
-                    <p style="color: #ccc; margin-bottom: 15px;">Para seu evento especial</p>
+                    <p style="font-weight: 700; margin-bottom: 10px; font-size: 1.1rem;">DJ Mamute - ${duracao}h de pura energia!</p>
                     
-                    ${desconto > 0 ? `
-                        <p style="color: #4cd964; font-size: 1rem; margin: 10px 0; font-weight: bold;">
-                            💰 Desconto de ${(desconto * 100)}% aplicado! (Economia de R$ ${valorDesconto.toLocaleString('pt-BR', { minimumFractionDigits: 2 })})
+                    ${servicos.length > 0 ? `
+                        <p style="color: #ccc; margin-bottom: 10px;">
+                            📦 Inclui: ${servicos.map(s => s.nome).join(', ')}
                         </p>
                     ` : ''}
                     
-                    ${pessoas > 80 ? `
-                        <p style="color: #ccc; font-size: 0.9rem; margin: 5px 0;">
-                            * Incluído adicional de R$ 4,00 por pessoa acima de 80 convidados
+                    ${desconto > 0 ? `
+                        <p style="color: #4cd964; font-size: 1rem; margin: 10px 0; font-weight: bold;">
+                            💰 Desconto de ${(desconto * 100)}% aplicado!
                         </p>
                     ` : ''}
                     
@@ -1094,18 +1150,24 @@
                     </div>
                     
                     <p style="font-size: 0.9rem; color: #ccc; margin: 5px 0;">
-                        Para ${pessoas} convidados • ${formatarData(data)}
+                        Para ${pessoas} convidados • ${duracao}h de diversão • ${formatarData(data)}
                     </p>
                 </div>
                 
-                <a href="https://wa.me/${PHONE}?text=${encodeURIComponent(
-                    `Olá! Gostaria de confirmar o orçamento para meu evento:\n\n*Serviço:* ${servicoPrincipal}\n*Convidados:* ${pessoas} pessoas\n*Data:* ${formatarData(data)}\n*Valor Final:* R$ ${precoFinal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n\nPodemos conversar sobre os detalhes?`
-                )}" class="btn btn-destaque" style="margin: 15px 0; display: inline-block;">
-                    ✅ CONFIRMAR RESERVA VIA WHATSAPP
-                </a>
+                <div style="display: flex; flex-direction: column; gap: 10px; margin: 20px 0;">
+                    <a href="https://wa.me/${PHONE}?text=${encodeURIComponent(
+                        `Olá! Acabei de simular um orçamento no site:\n\n*Duração:* ${duracao}h\n*Convidados:* ${pessoas} pessoas\n*Data:* ${formatarData(data)}\n*Valor Final:* R$ ${precoFinal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n\nPodemos agendar uma reunião para conversar sobre os detalhes?`
+                    )}" class="btn btn-whatsapp" style="text-decoration: none;">
+                        💬 AGENDAR REUNIÃO VIA WHATSAPP
+                    </a>
+                    
+                    <a href="tel:+5531998289081" class="btn" style="text-decoration: none;">
+                        📞 LIGAR AGORA
+                    </a>
+                </div>
                 
                 <p style="font-size: 0.8rem; color: #ccc;">
-                    ⚡ Orçamento válido por 24h • 💳 Parcele em até 6x • 📞 Atendimento personalizado
+                    ⚡ Orçamento válido por 24h • 💳 Parcele em até 6x • 🎯 Atendimento personalizado
                 </p>
             </div>
         `;
