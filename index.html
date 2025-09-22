@@ -1193,232 +1193,230 @@
     </a>
 
     <script>
-        // Configurações
-         const PHONE = '5531998289081';
-         const PRICE_PER_HOUR = 600;  // 
-         const MIN_HOURS = 1;         // 
-         const PRICE_PER_PERSON = 4;
-         const MAX_FUTURE_YEARS = 2;
+    // Configurações
+const PHONE = '5531998289081';
+const PRICE_PER_HOUR = 600;
+const MIN_HOURS = 1;
+const PRICE_PER_PERSON = 4;
+const MAX_FUTURE_YEARS = 2;
 
-        // Inicialização
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeMenu();
-            initializeCalendar();
-            initializeAnimations();
-            initializeScrollEffects();
-            inicializarContadorPessoas();
+// Inicialização
+document.addEventListener('DOMContentLoaded', function() {
+    initializeMenu();
+    initializeCalendar();
+    initializeAnimations();
+    initializeScrollEffects();
+    inicializarContadorPessoas();
+});
+
+// Menu Mobile
+function initializeMenu() {
+    const menuToggle = document.getElementById('mobile-menu');
+    const mainMenu = document.getElementById('main-menu');
+    
+    menuToggle.addEventListener('click', function() {
+        this.classList.toggle('active');
+        mainMenu.classList.toggle('active');
+    });
+    
+    // Fechar menu ao clicar nos links
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            mainMenu.classList.remove('active');
         });
+    });
+}
 
-        // Menu Mobile
-        function initializeMenu() {
-            const menuToggle = document.getElementById('mobile-menu');
-            const mainMenu = document.getElementById('main-menu');
-            
-            menuToggle.addEventListener('click', function() {
-                this.classList.toggle('active');
-                mainMenu.classList.toggle('active');
-            });
-            
-            // Fechar menu ao clicar nos links
-            document.querySelectorAll('nav a').forEach(link => {
-                link.addEventListener('click', () => {
-                    menuToggle.classList.remove('active');
-                    mainMenu.classList.remove('active');
-                });
-            });
-        }
+// Calendário com limites
+function initializeCalendar() {
+    const dataInput = document.getElementById('data-evento');
+    const today = new Date();
+    const maxDate = new Date();
+    maxDate.setFullYear(today.getFullYear() + MAX_FUTURE_YEARS);
+    
+    // Formatar datas para YYYY-MM-DD
+    const formatDate = (date) => date.toISOString().split('T')[0];
+    
+    dataInput.setAttribute('min', formatDate(today));
+    dataInput.setAttribute('max', formatDate(maxDate));
+    dataInput.value = formatDate(today);
 
-        // Calendário com limites
-        function initializeCalendar() {
-            const dataInput = document.getElementById('data-evento');
-            const today = new Date();
-            const maxDate = new Date();
-            maxDate.setFullYear(today.getFullYear() + MAX_FUTURE_YEARS);
-            
-            // Formatar datas para YYYY-MM-DD
-            const formatDate = (date) => date.toISOString().split('T')[0];
-            
-            dataInput.setAttribute('min', formatDate(today));
-            dataInput.setAttribute('max', formatDate(maxDate));
-            dataInput.value = formatDate(today);
+    // Mensagem de urgência
+    dataInput.addEventListener('change', function() {
+        const urgenciaMsg = document.getElementById('urgencia-msg');
+        const numInteressados = Math.floor(Math.random() * 8) + 3;
+        urgenciaMsg.innerHTML = `🔥 <strong>${numInteressados} pessoas</strong> interessadas nesta data! Garanta seu horário agora.`;
+        urgenciaMsg.style.display = 'block';
+    });
+}
 
-            // Mensagem de urgência
-            dataInput.addEventListener('change', function() {
-                const urgenciaMsg = document.getElementById('urgencia-msg');
-                const numInteressados = Math.floor(Math.random() * 8) + 3;
-                urgenciaMsg.innerHTML = `🔥 <strong>${numInteressados} pessoas</strong> interessadas nesta data! Garanta seu horário agora.`;
-                urgenciaMsg.style.display = 'block';
-            });
-        }
+// Animações - CORRIGIDO
+function initializeAnimations() {
+    const observerOptions = {
+        threshold: 0.2,
+        rootMargin: '0px 0px -50px 0px'
+    };
 
-        // Animações
-        function initializeAnimations() {
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('show');
-                    }
-                });
-            }, observerOptions);
-
-            // Observar elementos animáveis
-            document.querySelectorAll('.diferencial-card, .depoimento-card').forEach(el => {
-                observer.observe(el);
-            });
-        }
-
-        // Efeitos de scroll
-        function initializeScrollEffects() {
-            const header = document.getElementById('main-nav');
-            
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 100) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
-        }
-
-        // Cálculo de orçamento
-        function calcularOrcamento() {
-            const numPessoas = parseInt(document.getElementById('num-pessoas').value);
-            const dataEvento = document.getElementById('data-evento').value;
-            
-            // Validações
-            if (!dataEvento) {
-                showAlert('📅 Por favor, selecione a data do seu evento.');
-                return;
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');
             }
-            
-            const selectedDate = new Date(dataEvento);
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            
-            // Validar data (passado e limite de 2 anos)
-            if (selectedDate < today) {
-                showAlert('❌ Não é possível agendar para datas passadas. Selecione uma data futura.');
-                document.getElementById('data-evento').value = today.toISOString().split('T')[0];
-                return;
-            }
-            
-            const maxFutureDate = new Date();
-            maxFutureDate.setFullYear(today.getFullYear() + MAX_FUTURE_YEARS);
-            
-            if (selectedDate > maxFutureDate) {
-                showAlert(`❌ Agendamentos limitados a ${MAX_FUTURE_YEARS} anos no futuro. Por favor, selecione uma data mais próxima.`);
-                document.getElementById('data-evento').value = maxFutureDate.toISOString().split('T')[0];
-                return;
-            }
+        });
+    }, observerOptions);
 
-            // Cálculo do preço por hora 
-            let horasEvento = Math.max(MIN_HOURS, Math.ceil(numPessoas / 50));
-            let precoTotal = horasEvento * PRICE_PER_HOUR;
-            
-            // Adicional por pessoa (R$4 cada)
-            precoTotal += numPessoas * PRICE_PER_PERSON;
-            
-            
-            // Serviços extras
-            const servicosExtras = [];
-            const extras = document.querySelectorAll('.form-options input[type="checkbox"]:checked');
-            extras.forEach(item => {
-                servicosExtras.push(item.dataset.nome);
-                precoTotal += parseInt(item.dataset.preco);
-            });
+    // Observar elementos animáveis - CORRIGIDO
+    document.querySelectorAll('.diferencial-card, .depoimento-card').forEach(el => {
+        observer.observe(el);
+    });
+}
 
-            // Descontos progressivos
-            let desconto = 0;
-            if (numPessoas > 200) desconto = 0.1;
-            if (numPessoas > 300) desconto = 0.15;
-            
-            // Desconto adicional para eventos próximos
-            const diasParaEvento = Math.ceil((selectedDate - today) / (1000 * 60 * 60 * 24));
-            if (diasParaEvento <= 30) {
-                desconto += 0.05; // 5% adicional
-            }
-            
-            const precoComDesconto = precoTotal * (1 - desconto);
-            const valorDesconto = precoTotal - precoComDesconto;
-
-            // Exibir resultado
-            exibirResultadoOrcamento(numPessoas, dataEvento, servicosExtras, precoComDesconto, valorDesconto, desconto);
+// Efeitos de scroll
+function initializeScrollEffects() {
+    const header = document.getElementById('main-nav');
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
         }
+    });
+}
 
-        function exibirResultadoOrcamento(pessoas, data, servicos, precoFinal, valorDesconto, desconto) {
-            let horasEvento = Math.max(MIN_HOURS, Math.ceil(pessoas / 50));
-            const resultadoDiv = document.getElementById('resultado-orcamento');
-            const servicosTexto = servicos.length > 0 ? 
-                `Serviços selecionados: ${servicos.join(', ')}.` : 
-                'Pacote básico incluindo DJ e iluminação padrão.';
+// Cálculo de orçamento
+function calcularOrcamento() {
+    const numPessoas = parseInt(document.getElementById('num-pessoas').value);
+    const dataEvento = document.getElementById('data-evento').value;
+    
+    // Validações
+    if (!dataEvento) {
+        showAlert('📅 Por favor, selecione a data do seu evento.');
+        return;
+    }
+    
+    const selectedDate = new Date(dataEvento);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    // Validar data (passado e limite de 2 anos)
+    if (selectedDate < today) {
+        showAlert('❌ Não é possível agendar para datas passadas. Selecione uma data futura.');
+        document.getElementById('data-evento').value = today.toISOString().split('T')[0];
+        return;
+    }
+    
+    const maxFutureDate = new Date();
+    maxFutureDate.setFullYear(today.getFullYear() + MAX_FUTURE_YEARS);
+    
+    if (selectedDate > maxFutureDate) {
+        showAlert(`❌ Agendamentos limitados a ${MAX_FUTURE_YEARS} anos no futuro. Por favor, selecione uma data mais próxima.`);
+        document.getElementById('data-evento').value = maxFutureDate.toISOString().split('T')[0];
+        return;
+    }
+
+    // Cálculo do preço por hora 
+    let horasEvento = Math.max(MIN_HOURS, Math.ceil(numPessoas / 50));
+    let precoTotal = horasEvento * PRICE_PER_HOUR;
+    
+    // Adicional por pessoa (R$4 cada)
+    precoTotal += numPessoas * PRICE_PER_PERSON;
+    
+    // Serviços extras
+    const servicosExtras = [];
+    const extras = document.querySelectorAll('.form-options input[type="checkbox"]:checked');
+    extras.forEach(item => {
+        servicosExtras.push(item.dataset.nome);
+        precoTotal += parseInt(item.dataset.preco);
+    });
+
+    // Descontos progressivos
+    let desconto = 0;
+    if (numPessoas > 200) desconto = 0.1;
+    if (numPessoas > 300) desconto = 0.15;
+    
+    // Desconto adicional para eventos próximos
+    const diasParaEvento = Math.ceil((selectedDate - today) / (1000 * 60 * 60 * 24));
+    if (diasParaEvento <= 30) {
+        desconto += 0.05; // 5% adicional
+    }
+    
+    const precoComDesconto = precoTotal * (1 - desconto);
+    const valorDesconto = precoTotal - precoComDesconto;
+
+    // Exibir resultado
+    exibirResultadoOrcamento(numPessoas, dataEvento, servicosExtras, precoComDesconto, valorDesconto, desconto, horasEvento);
+}
+
+function exibirResultadoOrcamento(pessoas, data, servicos, precoFinal, valorDesconto, desconto, horasEvento) {
+    const resultadoDiv = document.getElementById('resultado-orcamento');
+    const servicosTexto = servicos.length > 0 ? 
+        `Serviços selecionados: ${servicos.join(', ')}.` : 
+        'Pacote básico incluindo DJ e iluminação padrão.';
+    
+    resultadoDiv.innerHTML = `
+        <div style="text-align: center;">
+            <h3 style="color: var(--cor-destaque); margin-bottom: 20px;">SEU ORÇAMENTO PERSONALIZADO</h3>
+
+            <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 10px; margin: 15px 0;">
+                <p style="margin: 10px 0;"><strong>Data:</strong> ${formatarData(data)}</p>
+                <p style="margin: 10px 0;"><strong>Convidados:</strong> ${pessoas} pessoas</p>
+                <p style="margin: 10px 0;"><strong>Duração:</strong> ${horasEvento} hora${horasEvento > 1 ? 's' : ''}</p>
+                <p style="margin: 10px 0;"><strong>Valor por hora:</strong> R$ ${PRICE_PER_HOUR}</p>
+                <p style="margin: 10px 0;"><strong>Taxa por pessoa:</strong> R$ ${PRICE_PER_PERSON}</p>
+                <p style="margin: 10px 0;"><strong>Serviços:</strong> ${servicosTexto}</p>
+            </div>
             
-           resultadoDiv.innerHTML = `
-    <div style="text-align: center;">
-        <h3 style="color: var(--cor-destaque); margin-bottom: 20px;">SEU ORÇAMENTO PERSONALIZADO</h3>
-
-        <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 10px; margin: 15px 0;">
-            <p style="margin: 10px 0;"><strong>Data:</strong> ${formatarData(data)}</p>
-            <p style="margin: 10px 0;"><strong>Convidados:</strong> ${pessoas} pessoas</p>
-            <p style="margin: 10px 0;"><strong>Duração:</strong> ${horasEvento} hora${horasEvento > 1 ? 's' : ''}</p>
-            <p style="margin: 10px 0;"><strong>Valor por hora:</strong> R$ ${PRICE_PER_HOUR}</p>
-            <p style="margin: 10px 0;"><strong>Taxa por pessoa:</strong> R$ ${PRICE_PER_PERSON}</p>
-            <p style="margin: 10px 0;"><strong>Serviços:</strong> ${servicosTexto}</p>
-        </div>
-    </div>
-`;
-                    
-                    ${desconto > 0 ? `
-                        <div style="background: rgba(255,215,0,0.1); padding: 15px; border-radius: 8px; margin: 15px 0;">
-                            <p style="color: var(--cor-destaque); font-weight: bold; margin: 0;">
-                                💰 DESCONTO DE R$ ${valorDesconto.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} APLICADO!
-                            </p>
-                        </div>
-                    ` : ''}
-                    
-                    <div style="margin: 25px 0;">
-                        <p style="font-size: 0.9rem; color: #ccc; margin-bottom: 10px;">INVESTIMENTO TOTAL</p>
-                        <p style="font-size: 2.5rem; font-weight: 900; color: var(--cor-destaque); margin: 0;">
-                            R$ ${precoFinal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-                        </p>
-                    </div>
-                    
-                    <a href="https://wa.me/${PHONE}?text=${encodeURIComponent(
-                        `Olá! Gostaria de confirmar o orçamento para meu evento:\n\n*Data:* ${formatarData(data)}\n*Convidados:* ${pessoas} pessoas\n*Serviços:* ${servicos.length > 0 ? servicos.join(', ') : 'Pacote básico'}\n*Valor:* R$ ${precoFinal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n\nPodemos conversar sobre os detalhes?`
-                    )}" class="btn btn-destaque" style="margin: 10px 0;">
-                        ✅ CONFIRMAR RESERVA
-                    </a>
-                    
-                    <p style="font-size: 0.9rem; color: #ccc; margin-top: 15px;">
-                        ⚡ <strong>Orçamento válido por 24 horas</strong> • 💳 <strong>Parcele em até 6x</strong>
+            ${desconto > 0 ? `
+                <div style="background: rgba(255,215,0,0.1); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <p style="color: var(--cor-destaque); font-weight: bold; margin: 0;">
+                        💰 DESCONTO DE R$ ${valorDesconto.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} APLICADO!
                     </p>
                 </div>
-            `;
+            ` : ''}
             
-            // Scroll suave para o resultado
-            resultadoDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
+            <div style="margin: 25px 0;">
+                <p style="font-size: 0.9rem; color: #ccc; margin-bottom: 10px;">INVESTIMENTO TOTAL</p>
+                <p style="font-size: 2.5rem; font-weight: 900; color: var(--cor-destaque); margin: 0;">
+                    R$ ${precoFinal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                </p>
+            </div>
+            
+            <a href="https://wa.me/${PHONE}?text=${encodeURIComponent(
+                `Olá! Gostaria de confirmar o orçamento para meu evento:\n\n*Data:* ${formatarData(data)}\n*Convidados:* ${pessoas} pessoas\n*Serviços:* ${servicos.length > 0 ? servicos.join(', ') : 'Pacote básico'}\n*Valor:* R$ ${precoFinal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n\nPodemos conversar sobre os detalhes?`
+            )}" class="btn btn-destaque" style="margin: 10px 0; display: inline-block;">
+                ✅ CONFIRMAR RESERVA
+            </a>
+            
+            <p style="font-size: 0.9rem; color: #ccc; margin-top: 15px;">
+                ⚡ <strong>Orçamento válido por 24 horas</strong> • 💳 <strong>Parcele em até 6x</strong>
+            </p>
+        </div>
+    `;
+    
+    // Scroll suave para o resultado
+    resultadoDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
 
-        function formatarData(dataString) {
-            const data = new Date(dataString);
-            return data.toLocaleDateString('pt-BR', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric'
-            });
-        }
+function formatarData(dataString) {
+    const data = new Date(dataString);
+    return data.toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    });
+}
 
-        function showAlert(mensagem) {
+function showAlert(mensagem) {
     alert(mensagem);
 }
 
 // Contador de pessoas realista
 function inicializarContadorPessoas() {
     const contadorElemento = document.getElementById('contador-numero');
+    if (!contadorElemento) return;
+    
     let basePessoas = Math.floor(Math.random() * 6) + 3; // 3-8 pessoas base
     
     // Aumenta gradualmente
