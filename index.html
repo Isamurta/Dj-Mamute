@@ -823,8 +823,9 @@
             
             <div class="simulador-form">
                 <div class="observacao-preco">
-                    <strong>💰 Preço Base da Sonorização: R$ 1.100,00</strong><br>
-                    <small>* Preço base, varia de acordo com o tamanho do evento.</small>
+                    <strong>💰 Preços Base (DJ + Som):</strong><br>
+                    • Funk 1h30: R$ 460 | 2h: R$ 500 | 3h: R$ 550<br>
+                    • Cerimonial (até 4h): R$ 900 | Completo: R$ 1.100
                 </div>
                 
                 <div class="form-group">
@@ -834,18 +835,18 @@
                 
                 <div class="form-group">
                     <label for="num-pessoas">👥 Número de Convidados:</label>
-                    <input type="number" id="num-pessoas" min="10" value="100" required>
-                    <small style="display: block; margin-top: 5px; color: #ccc;">* Acima de 50 pessoas: +R$ 4,00 por pessoa adicional</small>
+                    <input type="number" id="num-pessoas" min="10" max="114" value="100" required>
+                    <small style="display: block; margin-top: 5px; color: #ccc;">* Acima de 80 pessoas: +R$ 4,00 por pessoa adicional</small>
                 </div>
                 
                 <div class="form-group">
-                    <label for="tipo-evento">🎉 Tipo de Evento:</label>
-                    <select id="tipo-evento">
-                        <option value="casamento">Casamento</option>
-                        <option value="formatura">Formatura</option>
-                        <option value="15anos">Festa de 15 Anos</option>
-                        <option value="corporativo">Evento Corporativo</option>
-                        <option value="outro">Outro</option>
+                    <label for="modalidade-servico">🎵 Modalidade e Duração:</label>
+                    <select id="modalidade-servico">
+                        <option value="460">Funk - 1h30 (R$ 460)</option>
+                        <option value="500">Funk - 2h (R$ 500)</option>
+                        <option value="550">Funk - 3h (R$ 550)</option>
+                        <option value="900">Cerimonial - Show até 4h (R$ 900)</option>
+                        <option value="1100">Cerimonial - Completo (R$ 1.100)</option>
                     </select>
                 </div>
                 
@@ -857,9 +858,6 @@
 
                         <input type="checkbox" id="pirotecnia" data-nome="Efeitos Pirotécnicos (Fumaça)" data-preco="500">
                         <label for="pirotecnia">Efeitos Pirotécnicos com Fumaça (+R$500)</label>
-
-                        <input type="checkbox" id="sonorizacao" data-nome="Sonorização" data-preco="1100">
-                        <label for="sonorizacao">Sonorização Profissional (+R$1.100)</label>
                     </div>
                 </div>
                 
@@ -907,8 +905,8 @@
     <script>
     // Configurações atualizadas conforme solicitado
     const PHONE = '5531998289081';
-    const PRICE_BASE_SOM = 1100; // Preço base do som
-    const PRICE_PER_PERSON_OVER_50 = 4; // +R$4 por pessoa acima de 50
+    const MAX_PESSOAS = 114; // Alterado de 50 para 114
+    const PRICE_PER_PERSON_OVER_80 = 4; // +R$4 por pessoa acima de 80 (alterado de 50 para 80)
     const MAX_FUTURE_YEARS = 2;
 
     // Inicialização
@@ -982,18 +980,18 @@
         });
     }
 
-    // Contador de pessoas (CORRIGIDO - aleatório entre 3 e 30)
+    // Contador de pessoas (ATUALIZADO - limite de 114 pessoas)
     function inicializarContadorPessoas() {
         const contadorElemento = document.getElementById('contador-numero');
         if (!contadorElemento) return;
         
-        // Número inicial aleatório entre 3 e 30
-        let pessoasVisitadas = Math.floor(Math.random() * 28) + 3;
+        // Número inicial aleatório entre 3 e 114
+        let pessoasVisitadas = Math.floor(Math.random() * 111) + 3;
         contadorElemento.textContent = `${pessoasVisitadas} pessoas visitaram hoje`;
         
         // Aumenta gradualmente ao longo do tempo
         const intervalo = setInterval(() => {
-            if (Math.random() > 0.7 && pessoasVisitadas < 50) {
+            if (Math.random() > 0.7 && pessoasVisitadas < MAX_PESSOAS) {
                 pessoasVisitadas += Math.floor(Math.random() * 3) + 1;
                 contadorElemento.textContent = `${pessoasVisitadas} pessoas visitaram hoje`;
                 
@@ -1004,8 +1002,8 @@
                 }, 10);
             }
             
-            // Para após atingir um limite razoável
-            if (pessoasVisitadas >= 50) {
+            // Para após atingir o limite de 114
+            if (pessoasVisitadas >= MAX_PESSOAS) {
                 clearInterval(intervalo);
             }
         }, 15000 + Math.random() * 15000);
@@ -1013,7 +1011,7 @@
         // Aumenta quando o usuário rola a página
         let scrollAumentado = false;
         window.addEventListener('scroll', () => {
-            if (!scrollAumentado && window.scrollY > 500 && pessoasVisitadas < 40) {
+            if (!scrollAumentado && window.scrollY > 500 && pessoasVisitadas < (MAX_PESSOAS - 10)) {
                 pessoasVisitadas += 3;
                 scrollAumentado = true;
                 contadorElemento.textContent = `${pessoasVisitadas} pessoas visitaram hoje`;
@@ -1025,7 +1023,9 @@
     function calcularOrcamento() {
         const numPessoas = parseInt(document.getElementById('num-pessoas').value);
         const dataEvento = document.getElementById('data-evento').value;
-        const tipoEvento = document.getElementById('tipo-evento').value;
+        const modalidadeServico = document.getElementById('modalidade-servico');
+        const precoBase = parseInt(modalidadeServico.value);
+        const modalidadeTexto = modalidadeServico.options[modalidadeServico.selectedIndex].text;
         
         if (!dataEvento) {
             alert('📅 Por favor, selecione a data do seu evento.');
@@ -1033,30 +1033,23 @@
         }
 
         // Cálculo base conforme especificação
-        let precoTotal = PRICE_BASE_SOM; // Preço base do som
+        let precoTotal = precoBase; // Preço base da modalidade escolhida
         
-        // Adicional por pessoa acima de 50
-        if (numPessoas > 50) {
-            precoTotal += (numPessoas - 50) * PRICE_PER_PERSON_OVER_50;
+        // Adicional por pessoa acima de 80 (alterado de 50 para 80)
+        if (numPessoas > 80) {
+            precoTotal += (numPessoas - 80) * PRICE_PER_PERSON_OVER_80;
         }
 
-        // Serviços extras (separados conforme solicitado)
+        // Serviços extras
         const servicosExtras = [];
         const extras = document.querySelectorAll('.form-options input[type="checkbox"]:checked');
         extras.forEach(item => {
-            // Não incluir a sonorização duas vezes
-            if (item.id !== 'sonorizacao') {
-                servicosExtras.push(item.dataset.nome);
-                precoTotal += parseInt(item.dataset.preco);
-            }
+            servicosExtras.push(item.dataset.nome);
+            precoTotal += parseInt(item.dataset.preco);
         });
 
         // Descontos por tipo de evento e antecipação
         let desconto = 0;
-        
-        // Desconto por tipo de evento
-        if (tipoEvento === 'casamento') desconto += 0.05;
-        if (tipoEvento === 'formatura') desconto += 0.03;
         
         // Desconto adicional para eventos próximos (até 30 dias)
         const selectedDate = new Date(dataEvento);
@@ -1067,23 +1060,14 @@
         const precoComDesconto = precoTotal * (1 - desconto);
         const valorDesconto = precoTotal - precoComDesconto;
 
-        // Exibir resultado SIMPLIFICADO
-        exibirResultadoSimplificado(numPessoas, dataEvento, tipoEvento, servicosExtras, precoComDesconto, valorDesconto, desconto);
+        // Exibir resultado
+        exibirResultadoSimplificado(numPessoas, dataEvento, modalidadeTexto, servicosExtras, precoComDesconto, valorDesconto, desconto);
     }
 
-    function exibirResultadoSimplificado(pessoas, data, tipoEvento, servicos, precoFinal, valorDesconto, desconto) {
+    function exibirResultadoSimplificado(pessoas, data, modalidade, servicos, precoFinal, valorDesconto, desconto) {
         const resultadoDiv = document.getElementById('resultado-orcamento');
         const servicoPrincipal = servicos.length > 0 ? 
-            `DJ Mamute + ${servicos.join(', ')}` : 'DJ Mamute - Pacote Completo';
-        
-        // Texto personalizado por tipo de evento
-        const textosEvento = {
-            'casamento': 'para seu Casamento',
-            'formatura': 'para sua Formatura',
-            '15anos': 'para seus 15 Anos',
-            'corporativo': 'para seu Evento Corporativo',
-            'outro': 'para seu Evento'
-        };
+            `${modalidade} + ${servicos.join(', ')}` : modalidade;
         
         resultadoDiv.innerHTML = `
             <div style="text-align: center;">
@@ -1091,11 +1075,17 @@
                 
                 <div class="preco-simplificado">
                     <p style="font-weight: 700; margin-bottom: 10px; font-size: 1.1rem;">${servicoPrincipal}</p>
-                    <p style="color: #ccc; margin-bottom: 15px;">${textosEvento[tipoEvento]}</p>
+                    <p style="color: #ccc; margin-bottom: 15px;">Para seu evento especial</p>
                     
                     ${desconto > 0 ? `
                         <p style="color: #4cd964; font-size: 1rem; margin: 10px 0; font-weight: bold;">
                             💰 Desconto de ${(desconto * 100)}% aplicado! (Economia de R$ ${valorDesconto.toLocaleString('pt-BR', { minimumFractionDigits: 2 })})
+                        </p>
+                    ` : ''}
+                    
+                    ${pessoas > 80 ? `
+                        <p style="color: #ccc; font-size: 0.9rem; margin: 5px 0;">
+                            * Incluído adicional de R$ 4,00 por pessoa acima de 80 convidados
                         </p>
                     ` : ''}
                     
@@ -1109,7 +1099,7 @@
                 </div>
                 
                 <a href="https://wa.me/${PHONE}?text=${encodeURIComponent(
-                    `Olá! Gostaria de confirmar o orçamento para meu evento:\n\n*Serviço:* ${servicoPrincipal}\n*Tipo de Evento:* ${tipoEvento}\n*Convidados:* ${pessoas} pessoas\n*Data:* ${formatarData(data)}\n*Valor Final:* R$ ${precoFinal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n\nPodemos conversar sobre os detalhes?`
+                    `Olá! Gostaria de confirmar o orçamento para meu evento:\n\n*Serviço:* ${servicoPrincipal}\n*Convidados:* ${pessoas} pessoas\n*Data:* ${formatarData(data)}\n*Valor Final:* R$ ${precoFinal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n\nPodemos conversar sobre os detalhes?`
                 )}" class="btn btn-destaque" style="margin: 15px 0; display: inline-block;">
                     ✅ CONFIRMAR RESERVA VIA WHATSAPP
                 </a>
