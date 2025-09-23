@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --cor-principal: #8a2be2;
@@ -196,6 +197,13 @@
             font-size: 1rem;
             border: 1px solid rgba(138, 43, 226, 0.3);
             backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
         }
         
         .btn {
@@ -234,6 +242,10 @@
             animation: pulse-whatsapp 2s infinite;
         }
         
+        .btn-video {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+        }
+        
         .btn-container {
             display: flex;
             flex-direction: column;
@@ -269,19 +281,113 @@
             text-align: center;
         }
         
-        /* Mascote Mobile */
+        /* Mascote Mobile - EFEITOS AVANÇADOS PARA 1024x1024 */
         .mascote-container {
+            position: relative;
             text-align: center;
             margin: 30px 0;
-            padding: 20px;
+            padding: 40px 20px;
         }
         
         .mascote-image {
-            max-width: 250px;
+            max-width: 300px;
             width: 100%;
             height: auto;
-            border-radius: 15px;
-            box-shadow: var(--sombra-destaque);
+            border-radius: 20px;
+            position: relative;
+            z-index: 2;
+            animation: float-3d 4s ease-in-out infinite;
+            filter: drop-shadow(0 10px 30px rgba(138, 43, 226, 0.6));
+        }
+        
+        /* Efeito de aura avançado para 1024x1024 */
+        .mascote-container::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, 
+                rgba(138,43,226,0.3) 0%, 
+                rgba(255,215,0,0.2) 40%, 
+                rgba(255,215,0,0.1) 70%, 
+                transparent 100%);
+            border-radius: 50%;
+            animation: aura-pulse 4s ease-in-out infinite;
+            z-index: 1;
+        }
+        
+        /* Partículas flutuantes */
+        .mascote-container::before {
+            content: "✦✦✦";
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            font-size: 1.5rem;
+            color: var(--cor-destaque);
+            animation: float-particle 6s ease-in-out infinite;
+            z-index: 3;
+        }
+        
+        .particle-1, .particle-2, .particle-3 {
+            position: absolute;
+            font-size: 1.2rem;
+            color: var(--cor-principal);
+            z-index: 3;
+        }
+        
+        .particle-1 {
+            top: 80%;
+            left: 15%;
+            animation: float-particle 5s ease-in-out infinite 1s;
+        }
+        
+        .particle-2 {
+            top: 30%;
+            right: 10%;
+            animation: float-particle 7s ease-in-out infinite 2s;
+        }
+        
+        .particle-3 {
+            bottom: 20%;
+            right: 20%;
+            animation: float-particle 4s ease-in-out infinite 3s;
+        }
+        
+        @keyframes float-3d {
+            0%, 100% { 
+                transform: translateY(0px) rotateY(0deg) scale(1);
+            }
+            33% { 
+                transform: translateY(-15px) rotateY(5deg) scale(1.02);
+            }
+            66% { 
+                transform: translateY(-5px) rotateY(-3deg) scale(1.01);
+            }
+        }
+        
+        @keyframes aura-pulse {
+            0%, 100% { 
+                opacity: 0.7; 
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% { 
+                opacity: 0.9; 
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
+        
+        @keyframes float-particle {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.7;
+            }
+            50% { 
+                transform: translateY(-20px) rotate(180deg);
+                opacity: 1;
+            }
         }
         
         /* Grids Mobile First */
@@ -339,7 +445,7 @@
             display: block;
         }
         
-        /* Galeria Mobile - AGORA É SEÇÃO DE CREDIBILIDADE */
+        /* Credibilidade */
         .credibilidade-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -493,6 +599,28 @@
             background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(255, 215, 0, 0.05));
             border-radius: 15px;
             border: 1px solid rgba(138, 43, 226, 0.2);
+            position: relative;
+        }
+        
+        .alerta-data {
+            position: absolute;
+            top: -20px;
+            right: 20px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            animation: bounce 2s infinite;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+            z-index: 10;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
         }
         
         .preco-simplificado {
@@ -508,6 +636,80 @@
             font-weight: 900;
             color: var(--cor-destaque);
             margin: 10px 0;
+        }
+        
+        /* Modal de Vídeo */
+        .modal-video {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-video.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: var(--cor-card);
+            border-radius: 15px;
+            padding: 20px;
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+            border: 2px solid var(--cor-principal);
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* Proporção 16:9 */
+        }
+        
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #333, #000);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        
+        .play-button {
+            font-size: 4rem;
+            color: var(--cor-destaque);
+            transition: all 0.3s ease;
+        }
+        
+        .video-placeholder:hover .play-button {
+            transform: scale(1.2);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--cor-principal);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
         }
         
         /* WhatsApp Flutuante Mobile - MELHORADO */
@@ -688,6 +890,15 @@
             .servicos-extras {
                 grid-template-columns: repeat(2, 1fr);
             }
+            
+            .mascote-image {
+                max-width: 400px;
+            }
+            
+            .mascote-container::after {
+                width: 450px;
+                height: 450px;
+            }
         }
         
         /* Media Queries - Desktop */
@@ -701,7 +912,12 @@
             }
             
             .mascote-image {
-                max-width: 300px;
+                max-width: 500px;
+            }
+            
+            .mascote-container::after {
+                width: 550px;
+                height: 550px;
             }
             
             .simulador-form {
@@ -716,6 +932,18 @@
     </style>
 </head>
 <body>
+    <!-- Modal de Vídeo -->
+    <div class="modal-video" id="modalVideo">
+        <div class="modal-content">
+            <button class="close-modal" onclick="fecharModalVideo()">&times;</button>
+            <div class="video-container">
+                <div class="video-placeholder" onclick="reproduzirVideo()">
+                    <div class="play-button">▶</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Header Mobile First -->
     <header id="main-nav">
         <img src="logo-branca.png.png" alt="DJ Mamute - DJ Profissional para Festas em Minas Gerais" class="logo-header">
@@ -730,6 +958,7 @@
             <a href="#credibilidade">Nossa Experiência</a>
             <a href="#depoimentos">Depoimentos</a>
             <a href="#orcamento">Orçamento</a>
+            <a href="#" onclick="abrirModalVideo(); return false;">📹 Ver Vídeo</a>
         </nav>
     </header>
 
@@ -739,14 +968,15 @@
             <h1>SUA FESTA MERECE A BATIDA DO MAMUTE</h1>
             <p>Mais de 1000 eventos transformados em experiências inesquecíveis em Minas Gerais</p>
             
-           <div class="contador-pessoas" id="contador-pessoas">
-    🎯 <strong id="contador-numero">15 pessoas online agora</strong> • ⚡ <strong>Resposta em 2 minutos</strong>
+            <div class="contador-pessoas" id="contador-pessoas">
+                🎯 <strong id="contador-numero">25 pessoas online agora</strong> • ⚡ <strong>Resposta em 2 minutos</strong>
             </div>
             
             <div class="btn-container">
                 <a href="#orcamento" class="btn">💰 SIMULAR ORÇAMENTO ONLINE</a>
                 <a href="https://wa.me/5531998289081?text=Olá! Gostaria de mais informações sobre o DJ Mamute para meu evento." 
                    class="btn btn-destaque btn-whatsapp">💬 FALAR NO WHATSAPP</a>
+                <a href="#" class="btn btn-video" onclick="abrirModalVideo(); return false;">🎬 ASSISTIR VÍDEO</a>
             </div>
             
             <p style="margin-top: 20px; font-size: 0.9rem; color: #cccccc;">
@@ -762,7 +992,10 @@
             <p>Há mais de 5 anos criando momentos épicos em Minas Gerais</p>
             
             <div class="mascote-container">
-                <img src="logo-mascote.png.png" alt="Mascote DJ Mamute - Especialista em Festas" class="mascote-image">
+                <img src="image.png" alt="Mascote DJ Mamute - Especialista em Festas" class="mascote-image">
+                <div class="particle-1">⭐</div>
+                <div class="particle-2">✨</div>
+                <div class="particle-3">🌟</div>
             </div>
             
             <div class="stats-grid">
@@ -795,7 +1028,7 @@
                 <div class="diferencial-card">
                     <span class="icone">🎶</span>
                     <h3>Som Profissional de Alta Qualidade</h3>
-                    <p>Equipamentos profissionais que garantem qualidade em qualquer ambiente</p>
+                    <p>Equipamento de estúdio que faz a diferença em qualquer ambiente</p>
                 </div>
                 <div class="diferencial-card">
                     <span class="icone">💡</span>
@@ -873,7 +1106,7 @@
                 
                 <div class="form-group">
                     <label for="num-pessoas">👥 Número de Convidados:</label>
-                    <input type="number" id="num-pessoas" min="10" max="1000000" value="80" required>
+                    <input type="number" id="num-pessoas" min="10" max="100000" value="80" required>
                 </div>
                 
                 <div class="form-group">
@@ -892,11 +1125,11 @@
                         <div class="servico-btn" data-servico="som" data-preco="1100">
                             <i>🔊</i> Sonorização Completa
                         </div>
-                        <div class="servico-btn" data-servico="luzes" data-preco="500">
+                        <div class="servico-btn" data-servico="luzes" data-preco="300">
                             <i>💡</i> Show de Luzes
                         </div>
-                        <div class="servico-btn" data-servico="pirotecnia" data-preco="150">
-                            <i>🎇</i> Efeitos Especiais
+                        <div class="servico-btn" data-servico="pirotecnia" data-preco="500">
+                            <i>🎇</i> Pirotecnia
                         </div>
                     </div>
                 </div>
@@ -923,12 +1156,12 @@
                 <a href="https://facebook.com/djmamute" target="_blank" rel="noopener">Facebook</a>
             </div>
             
-            <p>⏰ <strong>Horário de Atendimento:</strong> Segunda a Domingo, 8h às 22h</p>
+            <p>⏰ <strong>Horário de Atendimento:</strong> Todos os dias, 8h às 22h</p>
             <p>📞 <strong>Telefone/WhatsApp:</strong> (31) 99828-9081</p>
-            <p>✉️ <strong>E-mail:</strong> djmamute.op@gmail.com</p>
+            <p>✉️ <strong>E-mail:</strong> contato@djmamute.com</p>
             
             <div class="direitos-reservados">
-                &copy; 2024 DJ Mamute. Todos os Direitos Reservados.
+                &copy; 2024 DJ Mamute. Todos os Direitos Reservados.Eventos feitos com ♡
             </div>
         </div>
     </footer>
@@ -946,7 +1179,7 @@
     // Configurações atualizadas
     const PHONE = '5531998289081';
     const MAX_PESSOAS = 114;
-    const PRICE_PER_PERSON_OVER_80 = 4;
+    const PRICE_PER_PERSON_OVER_80 = 2;
     const MAX_FUTURE_YEARS = 2;
 
     // Inicialização
@@ -980,16 +1213,20 @@
         });
     }
 
-    // Calendário
+    // Calendário CORRIGIDO - datas passadas não disponíveis, limite de 2 anos
     function initializeCalendar() {
         const dataInput = document.getElementById('data-evento');
         const today = new Date();
         const maxDate = new Date();
         maxDate.setFullYear(today.getFullYear() + MAX_FUTURE_YEARS);
         
-        dataInput.setAttribute('min', today.toISOString().split('T')[0]);
-        dataInput.setAttribute('max', maxDate.toISOString().split('T')[0]);
-        dataInput.value = today.toISOString().split('T')[0];
+        // Formatar datas para o padrão YYYY-MM-DD
+        const todayFormatted = today.toISOString().split('T')[0];
+        const maxDateFormatted = maxDate.toISOString().split('T')[0];
+        
+        dataInput.setAttribute('min', todayFormatted);
+        dataInput.setAttribute('max', maxDateFormatted);
+        dataInput.value = todayFormatted;
     }
 
     // Botões de horas
@@ -1015,6 +1252,30 @@
             });
         });
     }
+
+    // Modal de Vídeo
+    function abrirModalVideo() {
+        document.getElementById('modalVideo').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function fecharModalVideo() {
+        document.getElementById('modalVideo').classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+
+    function reproduzirVideo() {
+        // Quando tiver o vídeo, substituir por:
+        // <video controls autoplay>...</video>
+        alert('🎬 Vídeo será implementado em breve!');
+    }
+
+    // Fechar modal com ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            fecharModalVideo();
+        }
+    });
 
     // Animações
     function initializeAnimations() {
@@ -1045,73 +1306,72 @@
         });
     }
 
-    // Contador de pessoas (limite de 114)
-   // Contador de pessoas online (limite de 114)
-function inicializarContadorPessoas() {
-    const contadorElemento = document.getElementById('contador-numero');
-    if (!contadorElemento) return;
-    
-    // Número inicial aleatório entre 20 e 50 (pessoas online agora)
-    let pessoasOnline = Math.floor(Math.random() * 30) + 20;
-    contadorElemento.textContent = `${pessoasOnline} pessoas online agora`;
-    
-    // Simular variação de pessoas online (aumenta e diminui)
-    const intervalo = setInterval(() => {
-        // 70% de chance de mudar o número
-        if (Math.random() > 0.3) {
-            // Decide se aumenta ou diminui (60% aumenta, 40% diminui)
-            if (Math.random() > 0.4 && pessoasOnline < MAX_PESSOAS) {
-                // Aumenta entre 1-3 pessoas
-                pessoasOnline += Math.floor(Math.random() * 3) + 1;
-            } else if (pessoasOnline > 10) {
-                // Diminui entre 1-2 pessoas
-                pessoasOnline -= Math.floor(Math.random() * 2) + 1;
+    // Contador de pessoas online (limite de 114)
+    function inicializarContadorPessoas() {
+        const contadorElemento = document.getElementById('contador-numero');
+        if (!contadorElemento) return;
+        
+        let pessoasOnline = Math.floor(Math.random() * 30) + 20;
+        contadorElemento.textContent = `${pessoasOnline} pessoas online agora`;
+        
+        const intervalo = setInterval(() => {
+            if (Math.random() > 0.3) {
+                if (Math.random() > 0.4 && pessoasOnline < MAX_PESSOAS) {
+                    pessoasOnline += Math.floor(Math.random() * 3) + 1;
+                } else if (pessoasOnline > 10) {
+                    pessoasOnline -= Math.floor(Math.random() * 2) + 1;
+                }
+                
+                contadorElemento.textContent = `${pessoasOnline} pessoas online agora`;
+                
+                contadorElemento.parentElement.style.animation = 'none';
+                setTimeout(() => {
+                    contadorElemento.parentElement.style.animation = 'pulse 1s ease-in-out';
+                }, 10);
             }
             
-            contadorElemento.textContent = `${pessoasOnline} pessoas online agora`;
-            
-            // Efeito visual de atualização
-            contadorElemento.parentElement.style.animation = 'none';
-            setTimeout(() => {
-                contadorElemento.parentElement.style.animation = 'pulse 1s ease-in-out';
-            }, 10);
-        }
-        
-        // Mantém dentro dos limites
-        if (pessoasOnline >= MAX_PESSOAS) {
-            pessoasOnline = MAX_PESSOAS - 2;
-        }
-        if (pessoasOnline < 10) {
-            pessoasOnline = 12;
-        }
-    }, 8000 + Math.random() * 7000); // Atualiza a cada 8-15 segundos
+            if (pessoasOnline >= MAX_PESSOAS) {
+                pessoasOnline = MAX_PESSOAS - 2;
+            }
+            if (pessoasOnline < 10) {
+                pessoasOnline = 12;
+            }
+        }, 8000 + Math.random() * 7000);
 
-    // Aumenta quando o usuário rola a página (simula mais engajamento)
-    let scrollAumentado = false;
-    window.addEventListener('scroll', () => {
-        if (!scrollAumentado && window.scrollY > 300 && pessoasOnline < (MAX_PESSOAS - 5)) {
-            pessoasOnline += 2;
-            scrollAumentado = true;
-            contadorElemento.textContent = `${pessoasOnline} pessoas online agora`;
-        }
-    });
+        let scrollAumentado = false;
+        window.addEventListener('scroll', () => {
+            if (!scrollAumentado && window.scrollY > 300 && pessoasOnline < (MAX_PESSOAS - 5)) {
+                pessoasOnline += 2;
+                scrollAumentado = true;
+                contadorElemento.textContent = `${pessoasOnline} pessoas online agora`;
+            }
+        });
 
-    // Aumenta quando o usuário clica em algo (simula interação)
-    document.addEventListener('click', () => {
-        if (pessoasOnline < (MAX_PESSOAS - 3)) {
-            pessoasOnline += 1;
-            contadorElemento.textContent = `${pessoasOnline} pessoas online agora`;
-        }
-    });
-}
+        document.addEventListener('click', () => {
+            if (pessoasOnline < (MAX_PESSOAS - 3)) {
+                pessoasOnline += 1;
+                contadorElemento.textContent = `${pessoasOnline} pessoas online agora`;
+            }
+        });
+    }
 
-    // Cálculo de orçamento
+    // Cálculo de orçamento CORRIGIDO - data formatada corretamente
     function calcularOrcamento() {
         const numPessoas = parseInt(document.getElementById('num-pessoas').value);
         const dataEvento = document.getElementById('data-evento').value;
         
         if (!dataEvento) {
             alert('📅 Por favor, selecione a data do seu evento.');
+            return;
+        }
+
+        // CORREÇÃO: Converter data corretamente para evitar diferença de timezone
+        const dataObj = new Date(dataEvento + 'T12:00:00'); // Adiciona meio-dia para evitar problemas de fuso
+        const hoje = new Date();
+        hoje.setHours(12, 0, 0, 0); // Normaliza hora atual
+
+        if (dataObj < hoje) {
+            alert('❌ Por favor, selecione uma data futura.');
             return;
         }
 
@@ -1138,21 +1398,29 @@ function inicializarContadorPessoas() {
 
         // Desconto para eventos próximos (até 30 dias)
         let desconto = 0;
-        const selectedDate = new Date(dataEvento);
-        const today = new Date();
-        const diasParaEvento = Math.ceil((selectedDate - today) / (1000 * 60 * 60 * 24));
+        const diasParaEvento = Math.ceil((dataObj - hoje) / (1000 * 60 * 60 * 24));
         if (diasParaEvento <= 30) desconto += 0.05;
         
         const precoComDesconto = precoTotal * (1 - desconto);
         const valorDesconto = precoTotal - precoComDesconto;
 
-        exibirResultadoSimplificado(numPessoas, dataEvento, duracao, servicosExtras, precoComDesconto, valorDesconto, desconto);
+        // Gerar número aleatório de pessoas interessadas na data
+        const pessoasInteressadas = Math.floor(Math.random() * 11) + 2; // Entre 2 e 12
+
+        exibirResultadoSimplificado(numPessoas, dataObj, duracao, servicosExtras, precoComDesconto, valorDesconto, desconto, pessoasInteressadas);
     }
 
-    function exibirResultadoSimplificado(pessoas, data, duracao, servicos, precoFinal, valorDesconto, desconto) {
+    function exibirResultadoSimplificado(pessoas, data, duracao, servicos, precoFinal, valorDesconto, desconto, pessoasInteressadas) {
         const resultadoDiv = document.getElementById('resultado-orcamento');
         
+        // CORREÇÃO: Formatar data corretamente para o Brasil
+        const dataFormatada = formatarDataCorretamente(data);
+        
         resultadoDiv.innerHTML = `
+            <div class="alerta-data">
+                🚨 Há ${pessoasInteressadas} pessoas interessadas nesta data!
+            </div>
+            
             <div style="text-align: center;">
                 <h3 style="color: var(--cor-destaque); margin-bottom: 15px;">🎉 SEU ORÇAMENTO ESTÁ PRONTO!</h3>
                 
@@ -1176,13 +1444,13 @@ function inicializarContadorPessoas() {
                     </div>
                     
                     <p style="font-size: 0.9rem; color: #ccc; margin: 5px 0;">
-                        Para ${pessoas} convidados • ${duracao}h de diversão • ${formatarData(data)}
+                        Para ${pessoas} convidados • ${duracao}h de diversão • ${dataFormatada}
                     </p>
                 </div>
                 
                 <div style="display: flex; flex-direction: column; gap: 10px; margin: 20px 0;">
                     <a href="https://wa.me/${PHONE}?text=${encodeURIComponent(
-                        `Olá! Acabei de simular um orçamento no site:\n\n*Duração:* ${duracao}h\n*Convidados:* ${pessoas} pessoas\n*Data:* ${formatarData(data)}\n*Valor Final:* R$ ${precoFinal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n\nPodemos agendar uma reunião para conversar sobre os detalhes?`
+                        `Olá! Acabei de simular um orçamento no site:\n\n*Duração:* ${duracao}h\n*Convidados:* ${pessoas} pessoas\n*Data:* ${dataFormatada}\n*Valor Final:* R$ ${precoFinal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}\n\nPodemos agendar uma reunião para conversar sobre os detalhes?`
                     )}" class="btn btn-whatsapp" style="text-decoration: none;">
                         💬 AGENDAR REUNIÃO VIA WHATSAPP
                     </a>
@@ -1193,7 +1461,7 @@ function inicializarContadorPessoas() {
                 </div>
                 
                 <p style="font-size: 0.8rem; color: #ccc;">
-                    ⚡ Orçamento válido por 24h • 💳 Parcele em até 3x • 🎯 Atendimento personalizado  •  Valores sujeitos a alteração de acordo com o local do evento 
+                    ⚡ Orçamento válido por 24h • 💳 Parcele em até 6x • 🎯 Atendimento personalizado • 📍 O preço final será ajustado de acordo com as especificidades do seu evento, como a localização e o tamanho do evento.
                 </p>
             </div>
         `;
@@ -1201,8 +1469,17 @@ function inicializarContadorPessoas() {
         resultadoDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
+    // CORREÇÃO: Função para formatar data corretamente (sem problemas de timezone)
+    function formatarDataCorretamente(data) {
+        const dia = String(data.getDate()).padStart(2, '0');
+        const mes = String(data.getMonth() + 1).padStart(2, '0');
+        const ano = data.getFullYear();
+        return `${dia}/${mes}/${ano}`;
+    }
+
+    // Função antiga (mantida para compatibilidade)
     function formatarData(dataString) {
-        return new Date(dataString).toLocaleDateString('pt-BR');
+        return formatarDataCorretamente(new Date(dataString + 'T12:00:00'));
     }
     </script>
 </body>
