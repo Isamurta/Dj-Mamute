@@ -712,31 +712,128 @@
             z-index: 10;
         }
         
-        /* WhatsApp Flutuante Mobile - MELHORADO */
-        #whatsapp-float {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: var(--cor-texto);
-            padding: 15px 20px;
-            border-radius: 50px;
-            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
-            text-decoration: none;
-            font-weight: 700;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-            animation: pulse-whatsapp 2s infinite;
-            transition: all 0.3s ease;
-        }
-        
-        #whatsapp-float:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
-        }
+    /* 📍 COLE ESTE CÓDIGO AQUI (antes do .footer) */
+
+/* Container dos elementos flutuantes */
+#floating-elements {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+/* Vídeo em Miniatura */
+#video-miniatura {
+    width: 280px;
+    background: var(--cor-card);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 3px solid var(--cor-principal);
+    animation: slideInVideo 1s ease-out;
+    transition: all 0.3s ease;
+}
+
+#auto-video {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+}
+
+.video-controls {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.video-controls button {
+    background: var(--cor-principal);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.video-controls button:hover {
+    transform: scale(1.1);
+    background: var(--cor-destaque);
+    color: black;
+}
+
+/* WhatsApp flutuante ajustado */
+#whatsapp-float {
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: var(--cor-texto);
+    padding: 15px 20px;
+    border-radius: 50px;
+    box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+    text-decoration: none;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    animation: pulse-whatsapp 2s infinite;
+    transition: all 0.3s ease;
+}
+
+#whatsapp-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+}
+
+/* Estados do vídeo */
+#video-miniatura.minimizado {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+#video-miniatura.minimizado #auto-video {
+    height: 80px;
+    border-radius: 50%;
+}
+
+#video-miniatura.minimizado .video-controls {
+    display: none;
+}
+
+#video-miniatura.expandido {
+    width: 90vw;
+    height: 80vh;
+    max-width: 800px;
+    z-index: 2000;
+}
+
+#video-miniatura.expandido #auto-video {
+    height: calc(100% - 50px);
+}
+
+/* Animações */
+@keyframes slideInVideo {
+    from {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* 📍 FIM DO NOVO CÓDIGO CSS - continue com o Footer abaixo */
+
+}
         
         /* Footer */
         .footer {
@@ -928,7 +1025,50 @@
             .servicos-extras {
                 grid-template-columns: repeat(3, 1fr);
             }
+        
         }
+        @media (max-width: 768px) {
+    #floating-elements {
+        bottom: 15px;
+        right: 15px;
+        gap: 12px;
+    }
+    
+    #video-miniatura {
+        width: 250px;
+    }
+    
+    #auto-video {
+        height: 140px;
+    }
+    
+    #video-miniatura.expandido {
+        width: 95vw;
+        height: 50vh;
+    }
+    
+    #whatsapp-float {
+        padding: 12px 18px;
+        font-size: 0.85rem;
+    }
+}
+
+/* Responsivo para o vídeo - Telas menores que 480px (Mobile pequeno) */
+@media (max-width: 480px) {
+    #video-miniatura {
+        width: 220px;
+    }
+    
+    #auto-video {
+        height: 120px;
+    }
+    
+    .video-controls button {
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+}
     </style>
 </head>
 <body>
@@ -958,7 +1098,6 @@
             <a href="#credibilidade">Nossa Experiência</a>
             <a href="#depoimentos">Depoimentos</a>
             <a href="#orcamento">Orçamento</a>
-            <a href="#" onclick="abrirModalVideo(); return false;">📹 Ver Vídeo</a>
         </nav>
     </header>
 
@@ -1166,7 +1305,22 @@
         </div>
     </footer>
 
-    <!-- WhatsApp Flutuante -->
+  <!-- WhatsApp Flutuante + Vídeo Automático -->
+<div id="floating-elements">
+    <!-- Vídeo Automático -->
+    <div id="video-miniatura">
+        <video id="auto-video" autoplay muted loop controls>
+            <source src="seu-video.mp4" type="video/mp4">
+            Seu navegador não suporta vídeos HTML5.
+        </video>
+        <div class="video-controls">
+            <button onclick="toggleVideo()" id="video-toggle">⏸️</button>
+            <button onclick="expandirVideo()">⛶</button>
+            <button onclick="fecharVideo()">✕</button>
+        </div>
+    </div>
+    
+    <!-- WhatsApp -->
     <a href="https://wa.me/5531998289081?text=Olá! Gostaria de mais informações sobre o DJ Mamute para meu evento." 
        target="_blank" 
        id="whatsapp-float"
@@ -1174,6 +1328,7 @@
        rel="noopener">
         <span>💬 WhatsApp</span>
     </a>
+</div>
 
     <script>
     // Configurações atualizadas
