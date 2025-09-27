@@ -820,6 +820,7 @@
 }
 
 /* Animações */
+/* ✅ CÓDIGO CORRIGIDO */
 @keyframes slideInVideo {
     from {
         transform: translateX(100px);
@@ -829,11 +830,7 @@
         transform: translateX(0);
         opacity: 1;
     }
-
-
-/* 📍 FIM DO NOVO CÓDIGO CSS - continue com o Footer abaixo */
-
-}
+} /* ← CHAVE DE FECHAMENTO DO @keyframes ADICIONADA */
         
         /* Footer */
         .footer {
@@ -1309,7 +1306,7 @@
     <!-- Vídeo Automático -->
     <div id="video-miniatura">
         <video id="auto-video" autoplay muted loop controls>
-            <source src="seu-video.mp4" type="video/mp4">
+<source src="dj-mamute-promocional.mp4" type="video/mp4">
             Seu navegador não suporta vídeos HTML5.
         </video>
         <div class="video-controls">
@@ -1635,6 +1632,45 @@
     function formatarData(dataString) {
         return formatarDataCorretamente(new Date(dataString + 'T12:00:00'));
     }
+        // Controles do Vídeo Flutuante
+function toggleVideo() {
+    const video = document.getElementById('auto-video');
+    const toggleBtn = document.getElementById('video-toggle');
+    
+    if (video.paused) {
+        video.play();
+        toggleBtn.textContent = '⏸️';
+    } else {
+        video.pause();
+        toggleBtn.textContent = '▶️';
+    }
+}
+
+function expandirVideo() {
+    const videoContainer = document.getElementById('video-miniatura');
+    videoContainer.classList.toggle('expandido');
+}
+
+function fecharVideo() {
+    const videoContainer = document.getElementById('video-miniatura');
+    videoContainer.style.display = 'none';
+}
+
+// Inicializar vídeo quando a página carregar
+document.addEventListener('DOMContentLoaded', function() {
+    const video = document.getElementById('auto-video');
+    
+    // Configurar eventos do vídeo
+    video.addEventListener('play', function() {
+        document.getElementById('video-toggle').textContent = '⏸️';
+    });
+    
+    video.addEventListener('pause', function() {
+        document.getElementById('video-toggle').textContent = '▶️';
+    });
+});
+
+} // ← ESTE é o fechamento do DOMContentLoaded principal - CUIDADO!
     </script>
 </body>
 </html>
