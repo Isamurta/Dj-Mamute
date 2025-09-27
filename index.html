@@ -830,6 +830,72 @@
         transform: translateX(0);
         opacity: 1;
     }
+    /* Controles Simples do Vídeo */
+.video-controls-simples {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 8px 15px;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+}
+
+.video-controls-simples button {
+    background: var(--cor-principal);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-controls-simples button:hover {
+    transform: scale(1.2);
+    background: var(--cor-destaque);
+    color: black;
+}
+
+/* Esconder controles quando não necessário */
+#video-miniatura:not(:hover) .video-controls-simples {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#video-miniatura:hover .video-controls-simples {
+    opacity: 1;
+}
+
+/* Estado expandido */
+#video-miniatura.expandido {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    height: 80vh;
+    max-width: 800px;
+    z-index: 2000;
+    cursor: pointer;
+}
+
+#video-miniatura.expandido #auto-video {
+    height: 100%;
+    object-fit: contain;
+}
+
+#video-miniatura.expandido .video-controls-simples {
+    bottom: 20px;
+    font-size: 1.2rem;
 } /* ← CHAVE DE FECHAMENTO DO @keyframes ADICIONADA */
         
         /* Footer */
@@ -1301,15 +1367,18 @@
         </div>
     </footer>
 
-  <!-- WhatsApp Flutuante + Vídeo Automático -->
+ <!-- WhatsApp Flutuante + Vídeo Automático -->
 <div id="floating-elements">
-    <!-- Vídeo Automático -->
+    <!-- Vídeo Automático COM CONTROLES SIMPLES -->
     <div id="video-miniatura">
-       <video id="auto-video" autoplay muted loop playsinline>
-    <source src="dj-mamute-promocional.mp4" type="video/mp4">
+        <video id="auto-video" autoplay muted loop playsinline>
+            <source src="dj-mamute-promocional.mp4" type="video/mp4">
             Seu navegador não suporta vídeos HTML5.
         </video>
-        
+        <div class="video-controls-simples">
+            <button onclick="toggleVideo()" id="video-toggle" title="Pausar/Continuar">⏸️</button>
+            <button onclick="expandirVideo()" id="video-expandir" title="Expandir/Retrair">⛶</button>
+        </div>
     </div>
     
     <!-- WhatsApp -->
@@ -1321,7 +1390,6 @@
         <span>💬 WhatsApp</span>
     </a>
 </div>
-
     <script>
     // Configurações atualizadas
     const PHONE = '5531984644320';
@@ -1624,25 +1692,56 @@
         return `${dia}/${mes}/${ano}`;
     }
 
-    // Função antiga (mantida para compatibilidade)
-       // ✅ VÍDEO AUTOMÁTICO SIMPLIFICADO
+       // ✅ CONTROLES DO VÍDEO COM SOM
+    function toggleVideo() {
+        const video = document.getElementById('auto-video');
+        const toggleBtn = document.getElementById('video-toggle');
+        
+        if (video.paused) {
+            video.play();
+            toggleBtn.textContent = '⏸️';
+            video.muted = false; // HABILITA O SOM!
+        } else {
+            video.pause();
+            toggleBtn.textContent = '▶️';
+        }
+    }
+
+    function expandirVideo() {
+        const videoContainer = document.getElementById('video-miniatura');
+        const expandirBtn = document.getElementById('video-expandir');
+        
+        videoContainer.classList.toggle('expandido');
+        
+        if (videoContainer.classList.contains('expandido')) {
+            expandirBtn.textContent = '⛶';
+            expandirBtn.title = "Retrair";
+        } else {
+            expandirBtn.textContent = '⛶';
+            expandirBtn.title = "Expandir";
+        }
+    }
+
+    // Inicialização do vídeo
     const videoContainer = document.getElementById('video-miniatura');
     const video = document.getElementById('auto-video');
     
     if (videoContainer && video) {
-        // Clique para expandir/retrair
-        videoContainer.addEventListener('click', function() {
-            this.classList.toggle('expandido');
-        });
-        
         // Garantir loop contínuo
         video.addEventListener('ended', function() {
             this.currentTime = 0;
             this.play();
         });
+        
+        // Play automático
+        video.play().then(() => {
+            console.log('Vídeo tocando automaticamente');
+        }).catch(error => {
+            console.log('Auto-play prevenido, aguardando interação');
+        });
     }
 
-} // ← Este fecha o DOMContentLoaded principal CORRETAMENTE
-    </script>
+} 
+            <script>
 </body>
 </html>
