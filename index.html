@@ -1305,15 +1305,11 @@
 <div id="floating-elements">
     <!-- Vídeo Automático -->
     <div id="video-miniatura">
-        <video id="auto-video" autoplay muted loop controls>
-<source src="dj-mamute-promocional.mp4" type="video/mp4">
+       <video id="auto-video" autoplay muted loop playsinline>
+    <source src="dj-mamute-promocional.mp4" type="video/mp4">
             Seu navegador não suporta vídeos HTML5.
         </video>
-        <div class="video-controls">
-            <button onclick="toggleVideo()" id="video-toggle">⏸️</button>
-            <button onclick="expandirVideo()">⛶</button>
-            <button onclick="fecharVideo()">✕</button>
-        </div>
+        
     </div>
     
     <!-- WhatsApp -->
@@ -1629,48 +1625,24 @@
     }
 
     // Função antiga (mantida para compatibilidade)
-    function formatarData(dataString) {
-        return formatarDataCorretamente(new Date(dataString + 'T12:00:00'));
-    }
-        // Controles do Vídeo Flutuante
-function toggleVideo() {
-    const video = document.getElementById('auto-video');
-    const toggleBtn = document.getElementById('video-toggle');
-    
-    if (video.paused) {
-        video.play();
-        toggleBtn.textContent = '⏸️';
-    } else {
-        video.pause();
-        toggleBtn.textContent = '▶️';
-    }
-}
-
-function expandirVideo() {
+       // ✅ VÍDEO AUTOMÁTICO SIMPLIFICADO
     const videoContainer = document.getElementById('video-miniatura');
-    videoContainer.classList.toggle('expandido');
-}
-
-function fecharVideo() {
-    const videoContainer = document.getElementById('video-miniatura');
-    videoContainer.style.display = 'none';
-}
-
-// Inicializar vídeo quando a página carregar
-document.addEventListener('DOMContentLoaded', function() {
     const video = document.getElementById('auto-video');
     
-    // Configurar eventos do vídeo
-    video.addEventListener('play', function() {
-        document.getElementById('video-toggle').textContent = '⏸️';
-    });
-    
-    video.addEventListener('pause', function() {
-        document.getElementById('video-toggle').textContent = '▶️';
-    });
-});
+    if (videoContainer && video) {
+        // Clique para expandir/retrair
+        videoContainer.addEventListener('click', function() {
+            this.classList.toggle('expandido');
+        });
+        
+        // Garantir loop contínuo
+        video.addEventListener('ended', function() {
+            this.currentTime = 0;
+            this.play();
+        });
+    }
 
-} // ← ESTE é o fechamento do DOMContentLoaded principal - CUIDADO!
+} // ← Este fecha o DOMContentLoaded principal CORRETAMENTE
     </script>
 </body>
 </html>
