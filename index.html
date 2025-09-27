@@ -715,7 +715,6 @@
     /* 📍 COLE ESTE CÓDIGO AQUI (antes do .footer) */
 
 /* Container dos elementos flutuantes */
-/* COLE ISSO NO LUGAR: */
 #floating-elements {
     position: fixed;
     bottom: 15px;
@@ -728,7 +727,7 @@
 }
 
 #video-miniatura {
-    width: 150px;
+    width: 200px; /* Aumentei de 150px para 200px */
     background: var(--cor-card);
     border-radius: 10px;
     overflow: hidden;
@@ -758,7 +757,7 @@
     animation: pulse-whatsapp 2s infinite;
 }
 
-/* MELHORIAS PARA MOBILE */
+/* MELHORIAS PARA MOBILE - CONTROLES COMPLETOS */
 @media (max-width: 768px) {
     #floating-elements {
         bottom: 10px;
@@ -767,18 +766,27 @@
     }
     
     #video-miniatura {
-        width: 120px;
+        width: 180px; /* Maior no mobile */
     }
     
     #whatsapp-float {
         padding: 10px 15px;
         font-size: 0.8rem;
     }
+    
+    /* GARANTIR CONTROLES COMPLETOS NO MOBILE */
+    #auto-video::-webkit-media-controls {
+        display: flex !important;
+    }
+    
+    #auto-video::-webkit-media-controls-panel {
+        display: flex !important;
+    }
 }
 
 @media (max-width: 480px) {
     #video-miniatura {
-        width: 100px;
+        width: 160px; /* Ainda visível em telas pequenas */
     }
 }
 /* Animações */
@@ -1332,9 +1340,11 @@
  <!-- WhatsApp Flutuante + Vídeo Automático -->
 <!-- COLE ISSO NO LUGAR: -->
 <div id="floating-elements">
-    <!-- Vídeo Automático COM CONTROLES NORMAIS -->
+    <!-- Vídeo Automático COM CONTROLES COMPLETOS -->
     <div id="video-miniatura">
-        <video id="auto-video" autoplay muted loop playsinline controls style="width:100%; height:auto;">
+        <video id="auto-video" autoplay muted loop playsinline controls 
+                style="width:100%; height:auto;"
+                onclick="this.muted = !this.muted"> <!-- Clique para mutar/desmutar -->
             <source src="dj-mamute-promocional.mp4" type="video/mp4">
             Seu navegador não suporta vídeos HTML5.
         </video>
@@ -1651,7 +1661,7 @@ function formatarDataCorretamente(data) {
     return `${dia}/${mes}/${ano}`;
 }
 
-// ✅ VÍDEO SIMPLES - CONTROLES NORMAIS
+// ✅ VÍDEO MELHORADO - CONTROLES COMPLETOS
 document.addEventListener('DOMContentLoaded', function() {
     const video = document.getElementById('auto-video');
     
@@ -1659,6 +1669,21 @@ document.addEventListener('DOMContentLoaded', function() {
         // Tentar reproduzir automaticamente
         video.play().catch(error => {
             console.log('Auto-play prevenido');
+        });
+        
+        // Garantir controles visíveis
+        video.controls = true;
+        
+        // Clique no vídeo para mutar/desmutar (fallback para mobile)
+        video.addEventListener('click', function() {
+            this.muted = !this.muted;
+        });
+        
+        // Double-click para tela cheia (extra)
+        video.addEventListener('dblclick', function() {
+            if (video.requestFullscreen) {
+                video.requestFullscreen();
+            }
         });
     }
 });
