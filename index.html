@@ -715,66 +715,38 @@
     /* 📍 COLE ESTE CÓDIGO AQUI (antes do .footer) */
 
 /* Container dos elementos flutuantes */
+/* COLE ISSO NO LUGAR: */
 #floating-elements {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 15px;
+    right: 15px;
     z-index: 1000;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
     align-items: flex-end;
 }
 
-/* Vídeo em Miniatura */
 #video-miniatura {
-    width: 280px;
+    width: 150px;
     background: var(--cor-card);
-    border-radius: 15px;
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    border: 3px solid var(--cor-principal);
-    animation: slideInVideo 1s ease-out;
-    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    border: 2px solid var(--cor-principal);
 }
 
 #auto-video {
     width: 100%;
-    height: 160px;
-    object-fit: cover;
+    height: auto;
     display: block;
 }
 
-.video-controls {
-    display: flex;
-    justify-content: space-around;
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.8);
-}
-
-.video-controls button {
-    background: var(--cor-principal);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-}
-
-.video-controls button:hover {
-    transform: scale(1.1);
-    background: var(--cor-destaque);
-    color: black;
-}
-
-/* WhatsApp flutuante ajustado */
+/* WhatsApp flutuante */
 #whatsapp-float {
     background: linear-gradient(135deg, #25D366, #128C7E);
     color: var(--cor-texto);
-    padding: 15px 20px;
+    padding: 12px 18px;
     border-radius: 50px;
     box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
     text-decoration: none;
@@ -782,43 +754,33 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     animation: pulse-whatsapp 2s infinite;
-    transition: all 0.3s ease;
 }
 
-#whatsapp-float:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+/* MELHORIAS PARA MOBILE */
+@media (max-width: 768px) {
+    #floating-elements {
+        bottom: 10px;
+        right: 10px;
+        gap: 10px;
+    }
+    
+    #video-miniatura {
+        width: 120px;
+    }
+    
+    #whatsapp-float {
+        padding: 10px 15px;
+        font-size: 0.8rem;
+    }
 }
 
-/* Estados do vídeo */
-#video-miniatura.minimizado {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
+@media (max-width: 480px) {
+    #video-miniatura {
+        width: 100px;
+    }
 }
-
-#video-miniatura.minimizado #auto-video {
-    height: 80px;
-    border-radius: 50%;
-}
-
-#video-miniatura.minimizado .video-controls {
-    display: none;
-}
-
-#video-miniatura.expandido {
-    width: 90vw;
-    height: 80vh;
-    max-width: 800px;
-    z-index: 2000;
-}
-
-#video-miniatura.expandido #auto-video {
-    height: calc(100% - 50px);
-}
-
 /* Animações */
 /* ✅ CÓDIGO CORRIGIDO */
 @keyframes slideInVideo {
@@ -1368,17 +1330,14 @@
     </footer>
 
  <!-- WhatsApp Flutuante + Vídeo Automático -->
+<!-- COLE ISSO NO LUGAR: -->
 <div id="floating-elements">
-    <!-- Vídeo Automático COM CONTROLES SIMPLES -->
+    <!-- Vídeo Automático COM CONTROLES NORMAIS -->
     <div id="video-miniatura">
-        <video id="auto-video" autoplay muted loop playsinline>
+        <video id="auto-video" autoplay muted loop playsinline controls style="width:100%; height:auto;">
             <source src="dj-mamute-promocional.mp4" type="video/mp4">
             Seu navegador não suporta vídeos HTML5.
         </video>
-        <div class="video-controls-simples">
-            <button onclick="toggleVideo()" id="video-toggle" title="Pausar/Continuar">⏸️</button>
-            <button onclick="expandirVideo()" id="video-expandir" title="Expandir/Retrair">⛶</button>
-        </div>
     </div>
     
     <!-- WhatsApp -->
@@ -1684,64 +1643,26 @@
         resultadoDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    // CORREÇÃO: Função para formatar data corretamente (sem problemas de timezone)
-    function formatarDataCorretamente(data) {
-        const dia = String(data.getDate()).padStart(2, '0');
-        const mes = String(data.getMonth() + 1).padStart(2, '0');
-        const ano = data.getFullYear();
-        return `${dia}/${mes}/${ano}`;
-    }
+  // CORREÇÃO: Função para formatar data corretamente (sem problemas de timezone)
+function formatarDataCorretamente(data) {
+    const dia = String(data.getDate()).padStart(2, '0');
+    const mes = String(data.getMonth() + 1).padStart(2, '0');
+    const ano = data.getFullYear();
+    return `${dia}/${mes}/${ano}`;
+}
 
-       // ✅ CONTROLES DO VÍDEO COM SOM
-    function toggleVideo() {
-        const video = document.getElementById('auto-video');
-        const toggleBtn = document.getElementById('video-toggle');
-        
-        if (video.paused) {
-            video.play();
-            toggleBtn.textContent = '⏸️';
-            video.muted = false; // HABILITA O SOM!
-        } else {
-            video.pause();
-            toggleBtn.textContent = '▶️';
-        }
-    }
-
-    function expandirVideo() {
-        const videoContainer = document.getElementById('video-miniatura');
-        const expandirBtn = document.getElementById('video-expandir');
-        
-        videoContainer.classList.toggle('expandido');
-        
-        if (videoContainer.classList.contains('expandido')) {
-            expandirBtn.textContent = '⛶';
-            expandirBtn.title = "Retrair";
-        } else {
-            expandirBtn.textContent = '⛶';
-            expandirBtn.title = "Expandir";
-        }
-    }
-
-    // Inicialização do vídeo
-    const videoContainer = document.getElementById('video-miniatura');
+// ✅ VÍDEO SIMPLES - CONTROLES NORMAIS
+document.addEventListener('DOMContentLoaded', function() {
     const video = document.getElementById('auto-video');
     
-    if (videoContainer && video) {
-        // Garantir loop contínuo
-        video.addEventListener('ended', function() {
-            this.currentTime = 0;
-            this.play();
-        });
-        
-        // Play automático
-        video.play().then(() => {
-            console.log('Vídeo tocando automaticamente');
-        }).catch(error => {
-            console.log('Auto-play prevenido, aguardando interação');
+    if (video) {
+        // Tentar reproduzir automaticamente
+        video.play().catch(error => {
+            console.log('Auto-play prevenido');
         });
     }
+});
 
-} 
-            <script>
+    </script>
 </body>
 </html>
