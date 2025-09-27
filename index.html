@@ -783,7 +783,17 @@
         display: flex !important;
     }
 }
+/* Garantir que o date input funcione bem no mobile */
+input[type="date"] {
+    min-height: 44px; /* Tamanho mínimo para touch */
+}
 
+/* Estilizar o calendário nativo */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    padding: 5px;
+    cursor: pointer;
+}
 @media (max-width: 480px) {
     #video-miniatura {
         width: 160px; /* Ainda visível em telas pequenas */
@@ -1400,6 +1410,28 @@ css
         inicializarBotoesHoras();
         inicializarServicosExtras();
     });
+        // CORREÇÃO: Validar data do evento (hoje até 2 anos no futuro)
+function validarDataEvento(dataEvento) {
+    const dataObj = new Date(dataEvento + 'T12:00:00');
+    const hoje = new Date();
+    hoje.setHours(12, 0, 0, 0);
+    
+    const maxDate = new Date();
+    maxDate.setFullYear(hoje.getFullYear() + MAX_FUTURE_YEARS);
+    maxDate.setHours(12, 0, 0, 0);
+    
+    if (dataObj < hoje) {
+        alert('❌ Por favor, selecione uma data futura.');
+        return false;
+    }
+    
+    if (dataObj > maxDate) {
+        alert(`❌ Datas disponíveis: até ${maxDate.toLocaleDateString('pt-BR')} (2 anos no futuro).`);
+        return false;
+    }
+    
+    return true;
+}
 
     // Menu Mobile
     function initializeMenu() {
@@ -1423,19 +1455,26 @@ css
 
     // Calendário CORRIGIDO - datas passadas não disponíveis, limite de 2 anos
     function initializeCalendar() {
-        const dataInput = document.getElementById('data-evento');
-        const today = new Date();
-        const maxDate = new Date();
-        maxDate.setFullYear(today.getFullYear() + MAX_FUTURE_YEARS);
-        
-        // Formatar datas para o padrão YYYY-MM-DD
-        const todayFormatted = today.toISOString().split('T')[0];
-        const maxDateFormatted = maxDate.toISOString().split('T')[0];
-        
-        dataInput.setAttribute('min', todayFormatted);
-        dataInput.setAttribute('max', maxDateFormatted);
-        dataInput.value = todayFormatted;
+    const dataInput = document.getElementById('data-evento');
+    const today = new Date();
+    const maxDate = new Date();
+    maxDate.setFullYear(today.getFullYear() + MAX_FUTURE_YEARS);
+    
+    // CORREÇÃO: Formatar datas corretamente para evitar problemas de timezone
+    function formatDateForInput(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
     }
+    
+    const todayFormatted = formatDateForInput(today);
+    const maxDateFormatted = formatDateForInput(maxDate);
+    
+    dataInput.setAttribute('min', todayFormatted);
+    dataInput.setAttribute('max', maxDateFormatted);
+    dataInput.value = todayFormatted;
+}
 
     // Botões de horas
     function inicializarBotoesHoras() {
@@ -1564,23 +1603,24 @@ css
     }
 
     // Cálculo de orçamento CORRIGIDO - data formatada corretamente
-    function calcularOrcamento() {
-        const numPessoas = parseInt(document.getElementById('num-pessoas').value);
-        const dataEvento = document.getElementById('data-evento').value;
-        
-        if (!dataEvento) {
-            alert('📅 Por favor, selecione a data do seu evento.');
-            return;
-        }
+function calcularOrcamento() {
+    const numPessoas = parseInt(document.getElementById('num-pessoas').value);
+    const dataEvento = document.getElementById('data-evento').value;
+    
+    if (!dataEvento) {
+        alert('📅 Por favor, selecione a data do seu evento.');
+        return;
+    }
 
-        // CORREÇÃO: Converter data corretamente para evitar diferença de timezone
-        const dataObj = new Date(dataEvento + 'T12:00:00'); // Adiciona meio-dia para evitar problemas de fuso
-        const hoje = new Date();
-        hoje.setHours(12, 0, 0, 0); // Normaliza hora atual
+    // VALIDAÇÃO DA DATA (hoje até 2 anos no futuro)
+    if (!validarDataEvento(dataEvento)) {
+        return;
+    }
 
-        if (dataObj < hoje) {
-            alert('❌ Por favor, selecione uma data futura.');
-            return;
+    // CORREÇÃO: Converter data corretamente para evitar diferença de timezone
+    const dataObj = new Date(dataEvento + 'T12:00:00');
+    const hoje = new Date();
+    hoje.setHours(12, 0, 0, 0);
         }
 
         // Preço base pela duração selecionada
